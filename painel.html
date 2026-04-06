@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Achadinhos — Painel</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#080810;--surface:#10101c;--surface2:#18182a;--surface3:#20203a;--border:#2a2a45;--accent:#ff5c00;--accent2:#ff8c42;--glow:rgba(255,92,0,0.15);--text:#eeeef5;--muted:#6e6e9a;--danger:#ff3355;--success:#00d68f;--info:#4d9fff}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
+  #login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;background:radial-gradient(ellipse at 30% 20%,rgba(255,92,0,0.08),transparent 60%),var(--bg)}
+  .login-box{background:var(--surface);border:1px solid var(--border);border-radius:28px;padding:52px 44px;width:100%;max-width:420px;text-align:center;box-shadow:0 48px 96px rgba(0,0,0,0.6);animation:fadeUp .5s cubic-bezier(.16,1,.3,1)}
+  .login-emoji{font-size:3rem;margin-bottom:12px;display:block}
+  .login-logo{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--accent);margin-bottom:6px;letter-spacing:-1px}
+  .login-sub{color:var(--muted);font-size:.88rem;margin-bottom:40px}
+  .login-box input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:15px 18px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:1.2rem;outline:none;text-align:center;letter-spacing:4px;transition:border-color .2s}
+  .login-box input::placeholder{letter-spacing:0;font-size:.95rem;color:var(--muted)}
+  .login-box input:focus{border-color:var(--accent)}
+  .btn-login{width:100%;background:var(--accent);color:#fff;border:none;border-radius:14px;padding:15px;font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;margin-top:14px;transition:all .2s}
+  .btn-login:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 12px 32px rgba(255,92,0,.35)}
+  .login-error{color:var(--danger);font-size:.84rem;margin-top:14px;display:none}
+  #app{display:none}
+  header{background:rgba(16,16,28,.9);border-bottom:1px solid var(--border);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;backdrop-filter:blur(16px)}
+  .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.25rem;color:var(--accent)}
+  .logo span{color:var(--text)}
+  .header-right{display:flex;align-items:center;gap:10px}
+  .chip{background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:5px 13px;font-size:.8rem;color:var(--muted)}
+  .chip b{color:var(--accent)}
+  .btn-sair{background:transparent;border:1px solid var(--border);border-radius:10px;padding:7px 14px;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.83rem;cursor:pointer;transition:all .2s}
+  .btn-sair:hover{border-color:var(--danger);color:var(--danger)}
+  main{max-width:960px;margin:0 auto;padding:36px 24px 60px}
+  .section-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+  .section-title::before{content:'';width:4px;height:22px;background:var(--accent);border-radius:2px;flex-shrink:0}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:28px;margin-bottom:32px;animation:fadeUp .4s cubic-bezier(.16,1,.3,1)}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .full{grid-column:1/-1}
+  .field label{display:block;font-size:.76rem;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:7px;font-weight:500}
+  .field input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:11px;padding:12px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.93rem;outline:none;transition:border-color .2s,box-shadow .2s}
+  .field input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--glow)}
+  .field input::placeholder{color:var(--muted)}
+  .upload-area{border:2px dashed var(--border);border-radius:14px;padding:28px 20px;text-align:center;cursor:pointer;transition:all .2s;background:var(--surface2);position:relative;overflow:hidden}
+  .upload-area:hover,.upload-area.dragover{border-color:var(--accent);background:var(--glow)}
+  .upload-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+  .upload-icon{font-size:2rem;margin-bottom:8px}
+  .upload-text{color:var(--muted);font-size:.88rem}
+  .upload-text b{color:var(--accent)}
+  .preview-img{width:100%;max-height:160px;object-fit:cover;border-radius:10px;display:none;margin-top:12px}
+  .horarios-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+  .hora-chip{background:var(--surface3);border:1px solid var(--border);border-radius:8px;padding:6px 14px;font-size:.85rem;cursor:pointer;transition:all .15s;user-select:none;color:var(--muted)}
+  .hora-chip:hover{border-color:var(--accent);color:var(--text)}
+  .hora-chip.selected{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+  .hora-custom{display:flex;align-items:center;gap:8px;margin-top:10px}
+  .hora-custom input{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none;width:110px;transition:border-color .2s}
+  .hora-custom input:focus{border-color:var(--accent)}
+  .btn-add-hora{background:var(--surface3);border:1px solid var(--border);border-radius:8px;padding:8px 14px;color:var(--text);font-size:.85rem;cursor:pointer;transition:all .2s}
+  .btn-add-hora:hover{border-color:var(--accent);color:var(--accent)}
+  .form-actions{margin-top:22px;display:flex;justify-content:flex-end;gap:10px}
+  .btn-clear{background:transparent;border:1px solid var(--border);border-radius:11px;padding:12px 22px;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.9rem;cursor:pointer;transition:all .2s}
+  .btn-clear:hover{border-color:var(--danger);color:var(--danger)}
+  .btn-salvar{background:var(--accent);color:#fff;border:none;border-radius:11px;padding:12px 28px;font-family:'Syne',sans-serif;font-weight:700;font-size:.93rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:8px}
+  .btn-salvar:hover{background:var(--accent2);transform:translateY(-1px);box-shadow:0 8px 28px rgba(255,92,0,.3)}
+  .btn-salvar:disabled{opacity:.5;cursor:not-allowed;transform:none}
+  .spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:none}
+  .list-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+  .count-pill{background:var(--accent);color:#fff;border-radius:20px;padding:3px 12px;font-size:.78rem;font-weight:700}
+  .empty-state{text-align:center;padding:64px 24px;background:var(--surface);border:1px dashed var(--border);border-radius:20px;color:var(--muted)}
+  .empty-state .ei{font-size:3.5rem;margin-bottom:14px}
+  .product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+  .product-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;overflow:hidden;transition:all .22s;animation:fadeUp .3s cubic-bezier(.16,1,.3,1)}
+  .product-card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.35)}
+  .product-img-wrap{width:100%;height:180px;background:var(--surface2);position:relative;overflow:hidden}
+  .product-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+  .product-card:hover .product-img-wrap img{transform:scale(1.04)}
+  .no-img{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--border)}
+  .horarios-badge{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);border-radius:8px;padding:4px 10px;font-size:.72rem;color:var(--accent2);font-weight:600}
+  .product-body{padding:16px}
+  .product-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.93rem;margin-bottom:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .product-price{color:var(--accent);font-weight:700;font-size:1.15rem;margin-bottom:10px}
+  .product-horarios{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px}
+  .h-tag{background:var(--surface3);border-radius:6px;padding:3px 9px;font-size:.75rem;color:var(--muted)}
+  .product-actions{display:flex;gap:8px}
+  .btn-del{flex:1;background:transparent;border:1px solid var(--border);border-radius:9px;padding:9px;color:var(--muted);font-size:.83rem;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
+  .btn-del:hover{background:rgba(255,51,85,.1);border-color:var(--danger);color:var(--danger)}
+  .btn-link{background:var(--surface3);border:1px solid var(--border);border-radius:9px;padding:9px 14px;color:var(--muted);font-size:.83rem;cursor:pointer;transition:all .2s;text-decoration:none;display:flex;align-items:center}
+  .btn-link:hover{border-color:var(--info);color:var(--info)}
+  .toast{position:fixed;bottom:28px;right:28px;background:var(--success);color:#fff;border-radius:14px;padding:14px 22px;font-weight:600;font-size:.9rem;z-index:9999;transform:translateY(80px);opacity:0;transition:all .35s cubic-bezier(.16,1,.3,1);pointer-events:none;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+  .toast.show{transform:translateY(0);opacity:1}
+  .toast.err{background:var(--danger)}
+  .toast.warn{background:#f59e0b}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @media(max-width:600px){.form-grid{grid-template-columns:1fr}.full{grid-column:1}.login-box{padding:36px 22px}header{padding:12px 16px}main{padding:24px 16px 48px}}
+</style>
+</head>
+<body>
+
+<div id="login-screen">
+  <div class="login-box">
+    <span class="login-emoji">🛍️</span>
+    <div class="login-logo">Achadinhos</div>
+    <p class="login-sub">Painel de gerenciamento · Equipe</p>
+    <input type="password" id="senha-input" placeholder="Digite a senha" onkeydown="if(event.key==='Enter')login()">
+    <button class="btn-login" onclick="login()">Entrar no painel →</button>
+    <p class="login-error" id="login-error">⚠️ Senha incorreta.</p>
+  </div>
+</div>
+
+<div id="app">
+  <header>
+    <div class="logo">🛍️ <span>Achadinhos</span></div>
+    <div class="header-right">
+      <div class="chip">Produtos: <b id="hcount">0</b></div>
+      <button class="btn-sair" onclick="logout()">Sair</button>
+    </div>
+  </header>
+  <main>
+    <div class="card">
+      <div class="section-title">Adicionar Produto</div>
+      <div class="form-grid">
+        <div class="field"><label>Nome do Produto</label><input type="text" id="f-nome" placeholder="Ex: Fritadeira Air Fryer 5L"></div>
+        <div class="field"><label>Preço (R$)</label><input type="text" id="f-preco" placeholder="Ex: 189,90"></div>
+        <div class="field full"><label>Link de Afiliado</label><input type="text" id="f-link" placeholder="https://shopee.com.br/..."></div>
+        <div class="field full">
+          <label>Imagem do Produto</label>
+          <div class="upload-area" id="upload-area">
+            <input type="file" accept="image/*" id="f-imagem" onchange="previewImagem(this)">
+            <div class="upload-icon">📸</div>
+            <div class="upload-text">Toque para escolher uma imagem<br><b>ou arraste aqui</b></div>
+            <img class="preview-img" id="preview-img" src="" alt="">
+          </div>
+        </div>
+        <div class="field full">
+          <label>Horários de envio</label>
+          <div class="horarios-grid" id="horarios-grid"></div>
+          <div class="hora-custom">
+            <input type="time" id="hora-custom-input">
+            <button class="btn-add-hora" onclick="addHoraCustom()">+ Adicionar</button>
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn-clear" onclick="limparForm()">Limpar</button>
+        <button class="btn-salvar" id="btn-salvar" onclick="salvarProduto()">
+          <div class="spinner" id="spinner"></div>
+          <span id="btn-txt">＋ Salvar Produto</span>
+        </button>
+      </div>
+    </div>
+    <div class="list-header">
+      <div class="section-title" style="margin:0">Produtos <span class="count-pill" id="count-pill">0</span></div>
+    </div>
+    <div id="lista"></div>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const HORAS = ["07:00","09:00","12:00","15:00","18:00","20:00","22:00"];
+const CL_CLOUD = "dzmaqegbw";
+const CL_PRESET = "achadinhos";
+let horasSel = [], imgFile = null, senhaLocal = "";
+
+async function login() {
+  const s = document.getElementById('senha-input').value;
+  const r = await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({senha:s})});
+  if(r.ok){senhaLocal=s;document.getElementById('login-screen').style.display='none';document.getElementById('app').style.display='block';renderHoras();await load();}
+  else{const e=document.getElementById('login-error');e.style.display='block';document.getElementById('senha-input').value='';setTimeout(()=>e.style.display='none',3000);}
+}
+
+function logout(){senhaLocal='';document.getElementById('login-screen').style.display='flex';document.getElementById('app').style.display='none';document.getElementById('senha-input').value='';}
+
+function renderHoras(){
+  const g=document.getElementById('horarios-grid');
+  const todos=[...HORAS,...horasSel.filter(h=>!HORAS.includes(h))];
+  g.innerHTML=todos.map(h=>`<div class="hora-chip ${horasSel.includes(h)?'selected':''}" onclick="toggleH('${h}')">${h}${!HORAS.includes(h)?' ✕':''}</div>`).join('');
+}
+
+function toggleH(h){horasSel=horasSel.includes(h)?horasSel.filter(x=>x!==h):[...horasSel,h].sort();renderHoras();}
+
+function addHoraCustom(){const v=document.getElementById('hora-custom-input').value;if(!v||horasSel.includes(v))return;horasSel=[...horasSel,v].sort();document.getElementById('hora-custom-input').value='';renderHoras();}
+
+function previewImagem(i){imgFile=i.files[0];if(!imgFile)return;const r=new FileReader();r.onload=e=>{const img=document.getElementById('preview-img');img.src=e.target.result;img.style.display='block';document.querySelector('.upload-icon').style.display='none';document.querySelector('.upload-text').style.display='none';};r.readAsDataURL(imgFile);}
+
+async function uploadCL(file){const fd=new FormData();fd.append('file',file);fd.append('upload_preset',CL_PRESET);const r=await fetch(`https://api.cloudinary.com/v1_1/${CL_CLOUD}/image/upload`,{method:'POST',body:fd});const d=await r.json();return d.secure_url||null;}
+
+async function load(){const r=await fetch('/api/produtos');renderP(await r.json());}
+
+async function salvarProduto(){
+  const nome=document.getElementById('f-nome').value.trim(),preco=document.getElementById('f-preco').value.trim(),link=document.getElementById('f-link').value.trim();
+  if(!nome||!preco||!link){showToast('Preencha nome, preço e link!','err');return;}
+  if(!horasSel.length){showToast('Selecione pelo menos um horário!','warn');return;}
+  const btn=document.getElementById('btn-salvar'),sp=document.getElementById('spinner'),txt=document.getElementById('btn-txt');
+  btn.disabled=true;sp.style.display='block';txt.textContent='Salvando...';
+  let img='';
+  if(imgFile){img=await uploadCL(imgFile);if(!img){showToast('Erro no upload da imagem!','err');btn.disabled=false;sp.style.display='none';txt.textContent='＋ Salvar Produto';return;}}
+  const r=await fetch('/api/produtos',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({senha:senhaLocal,nome,preco,link,imagem:img,horarios:horasSel})});
+  if(r.ok){showToast('✅ Produto salvo!');limparForm();await load();}
+  else showToast('Erro ao salvar!','err');
+  btn.disabled=false;sp.style.display='none';txt.textContent='＋ Salvar Produto';
+}
+
+async function excluir(id){await fetch(`/api/produtos/${id}?senha=${senhaLocal}`,{method:'DELETE'});showToast('Removido!');await load();}
+
+function renderP(ps){
+  document.getElementById('hcount').textContent=ps.length;
+  document.getElementById('count-pill').textContent=ps.length;
+  const c=document.getElementById('lista');
+  if(!ps.length){c.innerHTML='<div class="empty-state"><div class="ei">📦</div><p>Nenhum produto ainda.<br>Adicione o primeiro acima!</p></div>';return;}
+  c.innerHTML=`<div class="product-grid">${ps.map(p=>`
+    <div class="product-card">
+      <div class="product-img-wrap">
+        ${p.imagem?`<img src="${p.imagem}" alt="${p.nome}" loading="lazy">`:'<div class="no-img">🛍️</div>'}
+        <div class="horarios-badge">🕐 ${p.horarios.length} horário${p.horarios.length>1?'s':''}</div>
+      </div>
+      <div class="product-body">
+        <div class="product-name">${p.nome}</div>
+        <div class="product-price">R$ ${p.preco}</div>
+        <div class="product-horarios">${p.horarios.map(h=>`<span class="h-tag">⏰ ${h}</span>`).join('')}</div>
+        <div class="product-actions">
+          <button class="btn-del" onclick="excluir(${p.id})">🗑 Remover</button>
+          <a class="btn-link" href="${p.link}" target="_blank">🔗</a>
+        </div>
+      </div>
+    </div>`).join('')}</div>`;
+}
+
+function limparForm(){['f-nome','f-link','f-preco'].forEach(i=>document.getElementById(i).value='');document.getElementById('f-imagem').value='';document.getElementById('preview-img').style.display='none';document.querySelector('.upload-icon').style.display='block';document.querySelector('.upload-text').style.display='block';imgFile=null;horasSel=[];renderHoras();}
+
+function showToast(m,t=''){const el=document.getElementById('toast');el.textContent=m;el.className='toast'+(t?' '+t:'');setTimeout(()=>el.classList.add('show'),10);setTimeout(()=>el.classList.remove('show'),3200);}
+
+const area=document.getElementById('upload-area');
+area.addEventListener('dragover',e=>{e.preventDefault();area.classList.add('dragover');});
+area.addEventListener('dragleave',()=>area.classList.remove('dragover'));
+area.addEventListener('drop',e=>{e.preventDefault();area.classList.remove('dragover');const f=e.dataTransfer.files[0];if(f&&f.type.startsWith('image/')){imgFile=f;const r=new FileReader();r.onload=ev=>{const img=document.getElementById('preview-img');img.src=ev.target.result;img.style.display='block';document.querySelector('.upload-icon').style.display='none';document.querySelector('.upload-text').style.display='none';};r.readAsDataURL(f);}});
+</script>
+</body>
+</html>
