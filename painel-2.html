@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Achadinhos — Painel</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080810;--surface:#10101c;--surface2:#18182a;--surface3:#20203a;--border:#2a2a45;--accent:#ff5c00;--accent2:#ff8c42;--glow:rgba(255,92,0,0.15);--text:#eeeef5;--muted:#6e6e9a;--danger:#ff3355;--success:#00d68f;--info:#4d9fff;--purple:#8b5cf6;--green:#10b981}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:"DM Sans",sans-serif;min-height:100vh}
+
+/* LOGIN */
+#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;background:radial-gradient(ellipse at 30% 20%,rgba(255,92,0,0.08),transparent 60%),var(--bg)}
+.login-box{background:var(--surface);border:1px solid var(--border);border-radius:28px;padding:52px 44px;width:100%;max-width:420px;text-align:center;box-shadow:0 48px 96px rgba(0,0,0,0.6);animation:fadeUp .5s cubic-bezier(.16,1,.3,1)}
+.login-emoji{font-size:3rem;margin-bottom:12px;display:block}
+.login-logo{font-family:"Syne",sans-serif;font-size:2rem;font-weight:800;color:var(--accent);margin-bottom:6px;letter-spacing:-1px}
+.login-sub{color:var(--muted);font-size:.88rem;margin-bottom:40px}
+.login-box input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:15px 18px;color:var(--text);font-family:"DM Sans",sans-serif;font-size:1.2rem;outline:none;text-align:center;letter-spacing:4px;transition:border-color .2s}
+.login-box input::placeholder{letter-spacing:0;font-size:.95rem;color:var(--muted)}
+.login-box input:focus{border-color:var(--accent)}
+.btn-login{width:100%;background:var(--accent);color:#fff;border:none;border-radius:14px;padding:15px;font-family:"Syne",sans-serif;font-size:1rem;font-weight:700;cursor:pointer;margin-top:14px;transition:all .2s}
+.btn-login:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 12px 32px rgba(255,92,0,.35)}
+.login-error{color:var(--danger);font-size:.84rem;margin-top:14px;display:none}
+
+/* APP */
+#app{display:none}
+header{background:rgba(16,16,28,.9);border-bottom:1px solid var(--border);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;backdrop-filter:blur(16px)}
+.logo{font-family:"Syne",sans-serif;font-weight:800;font-size:1.25rem;color:var(--accent)}
+.logo span{color:var(--text)}
+.header-right{display:flex;align-items:center;gap:10px}
+.chip{background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:5px 13px;font-size:.8rem;color:var(--muted)}
+.chip b{color:var(--accent)}
+.btn-sair{background:transparent;border:1px solid var(--border);border-radius:10px;padding:7px 14px;color:var(--muted);font-family:"DM Sans",sans-serif;font-size:.83rem;cursor:pointer;transition:all .2s}
+.btn-sair:hover{border-color:var(--danger);color:var(--danger)}
+main{max-width:1100px;margin:0 auto;padding:28px 24px 60px}
+
+/* TABS */
+.tabs{display:flex;gap:8px;margin-bottom:28px;border-bottom:1px solid var(--border);padding-bottom:0}
+.tab{background:transparent;border:none;border-bottom:2px solid transparent;padding:10px 20px;color:var(--muted);font-family:"Syne",sans-serif;font-weight:700;font-size:.9rem;cursor:pointer;transition:all .2s;margin-bottom:-1px}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* FORM */
+.section-title{font-family:"Syne",sans-serif;font-size:1rem;font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.section-title::before{content:"";width:4px;height:22px;background:var(--accent);border-radius:2px;flex-shrink:0}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:24px;margin-bottom:28px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.full{grid-column:1/-1}
+.field label{display:block;font-size:.76rem;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;font-weight:500}
+.field input,.field select,.field textarea{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:11px 13px;color:var(--text);font-family:"DM Sans",sans-serif;font-size:.9rem;outline:none;transition:border-color .2s}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--glow)}
+.field input::placeholder,.field textarea::placeholder{color:var(--muted)}
+.field textarea{resize:vertical;min-height:80px}
+.upload-area{border:2px dashed var(--border);border-radius:12px;padding:24px 16px;text-align:center;cursor:pointer;transition:all .2s;background:var(--surface2);position:relative;overflow:hidden}
+.upload-area:hover,.upload-area.dragover{border-color:var(--accent);background:var(--glow)}
+.upload-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.upload-icon{font-size:1.8rem;margin-bottom:6px}
+.upload-text{color:var(--muted);font-size:.85rem}
+.upload-text b{color:var(--accent)}
+.preview-img{width:100%;max-height:120px;object-fit:cover;border-radius:8px;display:none;margin-top:10px}
+.preview-vid{width:100%;max-height:160px;border-radius:8px;display:none;margin-top:10px}
+.horarios-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.hora-chip{background:var(--surface3);border:1px solid var(--border);border-radius:7px;padding:5px 12px;font-size:.82rem;cursor:pointer;transition:all .15s;user-select:none;color:var(--muted)}
+.hora-chip:hover{border-color:var(--accent);color:var(--text)}
+.hora-chip.selected{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+.hora-custom{display:flex;align-items:center;gap:8px;margin-top:8px}
+.hora-custom input{background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:7px 11px;color:var(--text);font-family:"DM Sans",sans-serif;font-size:.85rem;outline:none;width:100px}
+.hora-custom input:focus{border-color:var(--accent)}
+.btn-add-hora{background:var(--surface3);border:1px solid var(--border);border-radius:7px;padding:7px 12px;color:var(--text);font-size:.82rem;cursor:pointer;transition:all .2s}
+.btn-add-hora:hover{border-color:var(--accent);color:var(--accent)}
+.form-actions{margin-top:18px;display:flex;justify-content:flex-end;gap:10px}
+.btn-clear{background:transparent;border:1px solid var(--border);border-radius:10px;padding:10px 20px;color:var(--muted);font-family:"DM Sans",sans-serif;font-size:.88rem;cursor:pointer;transition:all .2s}
+.btn-clear:hover{border-color:var(--danger);color:var(--danger)}
+.btn-salvar{background:var(--accent);color:#fff;border:none;border-radius:10px;padding:10px 24px;font-family:"Syne",sans-serif;font-weight:700;font-size:.9rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:8px}
+.btn-salvar:hover{background:var(--accent2);transform:translateY(-1px);box-shadow:0 8px 24px rgba(255,92,0,.3)}
+.btn-salvar:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.spinner{width:15px;height:15px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:none}
+
+/* LIST HEADER */
+.list-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px}
+.list-header-left{display:flex;align-items:center;gap:10px}
+.count-pill{background:var(--accent);color:#fff;border-radius:20px;padding:2px 10px;font-size:.75rem;font-weight:700}
+.btn-embaralhar{background:linear-gradient(135deg,var(--purple),#6366f1);color:#fff;border:none;border-radius:10px;padding:8px 16px;font-family:"Syne",sans-serif;font-weight:700;font-size:.82rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px}
+.btn-embaralhar:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(139,92,246,.4)}
+.btn-embaralhar:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+/* CATEGORIA */
+.categoria-section{margin-bottom:24px}
+.categoria-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding:8px 14px;background:var(--surface2);border-radius:10px;border-left:3px solid var(--accent)}
+.categoria-nome{font-family:"Syne",sans-serif;font-weight:700;font-size:.9rem}
+.categoria-count{color:var(--muted);font-size:.8rem}
+
+/* PRODUCT GRID — COMPACTO */
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.product-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .2s;position:relative}
+.product-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.3)}
+.product-img-wrap{width:100%;height:120px;background:var(--surface2);position:relative;overflow:hidden}
+.product-img-wrap img,.product-img-wrap video{width:100%;height:100%;object-fit:cover}
+.product-card:hover .product-img-wrap img{transform:scale(1.05)}
+.no-img{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--border)}
+.video-badge{position:absolute;top:6px;left:6px;background:rgba(0,0,0,.7);border-radius:6px;padding:2px 8px;font-size:.68rem;color:#fff;font-weight:700}
+.horarios-badge{position:absolute;top:6px;right:6px;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);border-radius:6px;padding:2px 8px;font-size:.68rem;color:var(--accent2);font-weight:600}
+.product-body{padding:10px}
+.product-name{font-family:"Syne",sans-serif;font-weight:700;font-size:.82rem;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.product-price{color:var(--accent);font-weight:700;font-size:.95rem;margin-bottom:8px}
+.product-horarios{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:8px}
+.h-tag{background:var(--surface3);border-radius:5px;padding:2px 7px;font-size:.68rem;color:var(--muted)}
+.product-actions{display:flex;gap:6px}
+.btn-del{flex:1;background:transparent;border:1px solid var(--border);border-radius:7px;padding:6px;color:var(--muted);font-size:.78rem;cursor:pointer;transition:all .2s;font-family:"DM Sans",sans-serif;text-align:center}
+.btn-del:hover{background:rgba(255,51,85,.1);border-color:var(--danger);color:var(--danger)}
+.btn-edit{background:var(--surface3);border:1px solid var(--border);border-radius:7px;padding:6px 10px;color:var(--muted);font-size:.78rem;cursor:pointer;transition:all .2s}
+.btn-edit:hover{border-color:var(--info);color:var(--info)}
+.btn-link-card{background:var(--surface3);border:1px solid var(--border);border-radius:7px;padding:6px 10px;color:var(--muted);font-size:.78rem;cursor:pointer;transition:all .2s;text-decoration:none;display:flex;align-items:center}
+.btn-link-card:hover{border-color:var(--purple);color:var(--purple)}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);z-index:500;display:none;align-items:center;justify-content:center;padding:24px}
+.modal-overlay.open{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:24px;width:100%;max-width:460px;animation:fadeUp .3s cubic-bezier(.16,1,.3,1)}
+.modal-title{font-family:"Syne",sans-serif;font-weight:800;font-size:1rem;margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.modal-title::before{content:"";width:4px;height:18px;background:var(--info);border-radius:2px}
+.modal-horarios{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px}
+.modal-hora-chip{background:var(--surface3);border:1px solid var(--border);border-radius:7px;padding:5px 13px;font-size:.83rem;cursor:pointer;transition:all .15s;user-select:none;color:var(--muted)}
+.modal-hora-chip.selected{background:var(--info);border-color:var(--info);color:#fff;font-weight:600}
+.modal-hora-custom{display:flex;align-items:center;gap:8px;margin-top:8px;margin-bottom:18px}
+.modal-hora-custom input{background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:7px 11px;color:var(--text);font-family:"DM Sans",sans-serif;font-size:.85rem;outline:none;width:100px}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end}
+.btn-modal-cancel{background:transparent;border:1px solid var(--border);border-radius:10px;padding:10px 20px;color:var(--muted);font-family:"DM Sans",sans-serif;font-size:.88rem;cursor:pointer}
+.btn-modal-save{background:var(--info);color:#fff;border:none;border-radius:10px;padding:10px 22px;font-family:"Syne",sans-serif;font-weight:700;font-size:.88rem;cursor:pointer;transition:all .2s}
+.btn-modal-save:hover{opacity:.9;transform:translateY(-1px)}
+
+.empty-state{text-align:center;padding:48px 24px;background:var(--surface);border:1px dashed var(--border);border-radius:16px;color:var(--muted)}
+.empty-state .ei{font-size:3rem;margin-bottom:12px}
+.toast{position:fixed;bottom:24px;right:24px;background:var(--success);color:#fff;border-radius:12px;padding:12px 20px;font-weight:600;font-size:.88rem;z-index:9999;transform:translateY(80px);opacity:0;transition:all .35s cubic-bezier(.16,1,.3,1);pointer-events:none;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.err{background:var(--danger)}
+.toast.warn{background:#f59e0b}
+.toast.info{background:var(--purple)}
+.link-input-wrap{display:flex;gap:8px}
+.link-input-wrap input{flex:1}
+.btn-usar-link{background:var(--surface3);border:1px solid var(--border);border-radius:10px;padding:0 14px;color:var(--muted);font-size:.82rem;cursor:pointer;white-space:nowrap;transition:all .2s}
+.btn-usar-link:hover{border-color:var(--accent);color:var(--accent)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:600px){.form-grid{grid-template-columns:1fr}.full{grid-column:1}.product-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}.login-box{padding:36px 22px}header{padding:12px 16px}main{padding:20px 12px 48px}}
+</style>
+</head>
+<body>
+
+<div id="login-screen">
+  <div class="login-box">
+    <span class="login-emoji">🛍️</span>
+    <div class="login-logo">Achadinhos</div>
+    <p class="login-sub">Painel de gerenciamento · Equipe</p>
+    <input type="password" id="senha-input" placeholder="Digite a senha" onkeydown="if(event.key==='Enter')login()">
+    <button class="btn-login" onclick="login()">Entrar no painel →</button>
+    <p class="login-error" id="login-error">⚠️ Senha incorreta.</p>
+  </div>
+</div>
+
+<div id="app">
+  <header>
+    <div class="logo">🛍️ <span>Achadinhos</span></div>
+    <div class="header-right">
+      <div class="chip">Total: <b id="hcount">0</b></div>
+      <button class="btn-sair" onclick="logout()">Sair</button>
+    </div>
+  </header>
+  <main>
+
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('produtos')">📦 Produtos</button>
+      <button class="tab" onclick="switchTab('videos')">🎬 Vídeos</button>
+    </div>
+
+    <!-- TAB PRODUTOS -->
+    <div class="tab-content active" id="tab-produtos">
+      <div class="card">
+        <div class="section-title">Adicionar Produto</div>
+        <div class="form-grid">
+          <div class="field"><label>Nome do Produto</label><input type="text" id="f-nome" placeholder="Ex: Fritadeira Air Fryer 5L"></div>
+          <div class="field"><label>Preço (R$)</label><input type="text" id="f-preco" placeholder="Ex: 189,90"></div>
+          <div class="field full"><label>Link de Afiliado</label><input type="text" id="f-link" placeholder="https://shopee.com.br/..."></div>
+          <div class="field full">
+            <label>Imagem do Produto</label>
+            <div class="upload-area" id="upload-area-img">
+              <input type="file" accept="image/*" id="f-imagem" onchange="previewImagem(this)">
+              <div class="upload-icon">📸</div>
+              <div class="upload-text">Toque para escolher uma imagem<br><b>ou arraste aqui</b></div>
+              <img class="preview-img" id="preview-img" src="" alt="">
+            </div>
+          </div>
+          <div class="field full">
+            <label>Horários de envio <span style="color:var(--accent);font-size:.7rem;">(opcional — deixe vazio para distribuir automaticamente)</span></label>
+            <div class="horarios-grid" id="horarios-grid"></div>
+            <div class="hora-custom">
+              <input type="time" id="hora-custom-input">
+              <button class="btn-add-hora" onclick="addHoraCustom('horarios-grid','hora-custom-input',horasSel)">+ Adicionar</button>
+            </div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn-clear" onclick="limparFormProduto()">Limpar</button>
+          <button class="btn-salvar" id="btn-salvar-produto" onclick="salvarProduto()">
+            <div class="spinner" id="spinner-produto"></div>
+            <span id="btn-txt-produto">＋ Salvar Produto</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="list-header">
+        <div class="list-header-left">
+          <div class="section-title" style="margin:0">Produtos <span class="count-pill" id="count-pill-produtos">0</span></div>
+        </div>
+        <button class="btn-embaralhar" id="btn-embaralhar" onclick="embaralharHorarios()">🔀 Embaralhar</button>
+      </div>
+      <div id="lista-produtos"></div>
+    </div>
+
+    <!-- TAB VIDEOS -->
+    <div class="tab-content" id="tab-videos">
+      <div class="card">
+        <div class="section-title">Adicionar Vídeo</div>
+        <div class="form-grid">
+          <div class="field"><label>Nome do Produto</label><input type="text" id="v-nome" placeholder="Ex: Fritadeira Air Fryer 5L"></div>
+          <div class="field"><label>Preço (R$)</label><input type="text" id="v-preco" placeholder="Ex: 189,90"></div>
+          <div class="field full"><label>Link de Afiliado</label><input type="text" id="v-link" placeholder="https://shopee.com.br/..."></div>
+          <div class="field full">
+            <label>Vídeo do Produto</label>
+            <div class="upload-area" id="upload-area-vid">
+              <input type="file" accept="video/*" id="v-video" onchange="previewVideo(this)">
+              <div class="upload-icon" id="vid-icon">🎬</div>
+              <div class="upload-text" id="vid-text">Toque para escolher um vídeo<br><b>ou arraste aqui</b></div>
+              <video class="preview-vid" id="preview-vid" controls></video>
+            </div>
+            <div style="margin-top:10px">
+              <div class="field">
+                <label>Ou cole o link do vídeo (YouTube/TikTok)</label>
+                <div class="link-input-wrap">
+                  <input type="text" id="v-link-video" placeholder="https://youtube.com/... ou https://tiktok.com/...">
+                  <button class="btn-usar-link" onclick="usarLinkVideo()">Usar link</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="field full">
+            <label>Horários de envio</label>
+            <div class="horarios-grid" id="v-horarios-grid"></div>
+            <div class="hora-custom">
+              <input type="time" id="v-hora-custom-input">
+              <button class="btn-add-hora" onclick="addHoraCustom('v-horarios-grid','v-hora-custom-input',horasSelVid)">+ Adicionar</button>
+            </div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn-clear" onclick="limparFormVideo()">Limpar</button>
+          <button class="btn-salvar" id="btn-salvar-video" onclick="salvarVideo()">
+            <div class="spinner" id="spinner-video"></div>
+            <span id="btn-txt-video">＋ Salvar Vídeo</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="list-header">
+        <div class="list-header-left">
+          <div class="section-title" style="margin:0">Vídeos <span class="count-pill" id="count-pill-videos">0</span></div>
+        </div>
+      </div>
+      <div id="lista-videos"></div>
+    </div>
+
+  </main>
+</div>
+
+<!-- MODAL EDITAR HORÁRIOS -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <div class="modal-title">Editar Horários</div>
+    <div class="modal-horarios" id="modal-horarios-grid"></div>
+    <div class="modal-hora-custom">
+      <input type="time" id="modal-hora-input">
+      <button class="btn-add-hora" onclick="addModalHora()">+ Adicionar</button>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-modal-cancel" onclick="fecharModal()">Cancelar</button>
+      <button class="btn-modal-save" onclick="salvarEdicaoHorarios()">💾 Salvar</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const HORAS = ["07:00","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00"];
+const CL_CLOUD = "dzmaqegbw", CL_PRESET = "achadinhos";
+let horasSel=[], horasSelVid=[], imgFile=null, vidFile=null, vidLink="", senhaLocal="";
+let modalProdutoId=null, modalHorasSel=[], modalTipo="produto";
+
+const CATEGORIAS = {
+  "Cozinha":["frigideira","panela","faca","talheres","copo","prato","xicara","liquidificador","batedeira","airfryer","air fryer","fritadeira","espremedor","descascador","tabua","forma","assadeira","grelha","coador","peneira","escorredor","utensil","gadget","cozinha"],
+  "Eletrônicos":["celular","fone","headphone","carregador","cabo","adaptador","tablet","notebook","computador","teclado","mouse","webcam","camera","smart","tv","led","bluetooth","wifi","usb","hdmi","eletronico"],
+  "Casa & Decoração":["organizador","caixa","suporte","prateleira","cabide","gancho","ventilador","lampada","cortina","tapete","almofada","vaso","quadro","espelho","decoracao","casa","quarto","sala","banheiro"],
+  "Beleza & Saúde":["creme","perfume","maquiagem","escova","pente","secador","chapinha","massageador","saude","beleza","skincare","hidratante","protetor"],
+  "Bebê & Criança":["bebe","infantil","crianca","brinquedo","mamadeira","fraldas","carrinho","berco"],
+  "Esporte & Fitness":["academia","exercicio","musculacao","yoga","corrida","bicicleta","esporte","fitness","treino"],
+  "Pets":["pet","cachorro","gato","aquario","racao","coleira","brinquedo pet"],
+  "Outros":[]
+};
+
+function detectarCategoria(nome) {
+  const n = nome.toLowerCase();
+  for(const [cat, palavras] of Object.entries(CATEGORIAS)){
+    if(cat === "Outros") continue;
+    if(palavras.some(p => n.includes(p))) return cat;
+  }
+  return "Outros";
+}
+
+// AUTH
+async function login() {
+  const s = document.getElementById("senha-input").value;
+  const r = await fetch("/api/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({senha:s})});
+  if(r.ok){senhaLocal=s;document.getElementById("login-screen").style.display="none";document.getElementById("app").style.display="block";renderHoras("horarios-grid",horasSel);renderHoras("v-horarios-grid",horasSelVid);await loadAll();}
+  else{const e=document.getElementById("login-error");e.style.display="block";document.getElementById("senha-input").value="";setTimeout(()=>e.style.display="none",3000);}
+}
+function logout(){senhaLocal="";document.getElementById("login-screen").style.display="flex";document.getElementById("app").style.display="none";document.getElementById("senha-input").value="";}
+
+// TABS
+function switchTab(tab) {
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  document.querySelectorAll(".tab-content").forEach(t=>t.classList.remove("active"));
+  document.getElementById("tab-"+tab).classList.add("active");
+  event.target.classList.add("active");
+}
+
+// HORÁRIOS
+function renderHoras(gridId, sel) {
+  const g = document.getElementById(gridId);
+  const todos = [...HORAS, ...sel.filter(h=>!HORAS.includes(h))];
+  g.innerHTML = todos.map(h=>`<div class="hora-chip ${sel.includes(h)?"selected":""}" onclick="toggleHora('${gridId}','${h}',${gridId==="horarios-grid"?"horasSel":"horasSelVid"})">${h}${!HORAS.includes(h)?" ✕":""}</div>`).join("");
+}
+function toggleHora(gridId,h,arr){
+  const isImg = gridId==="horarios-grid";
+  if(isImg){horasSel=horasSel.includes(h)?horasSel.filter(x=>x!==h):[...horasSel,h].sort();}
+  else{horasSelVid=horasSelVid.includes(h)?horasSelVid.filter(x=>x!==h):[...horasSelVid,h].sort();}
+  renderHoras(gridId, isImg?horasSel:horasSelVid);
+}
+function addHoraCustom(gridId,inputId,arr){
+  const v=document.getElementById(inputId).value;
+  if(!v)return;
+  const isImg=gridId==="horarios-grid";
+  if(isImg){if(!horasSel.includes(v))horasSel=[...horasSel,v].sort();}
+  else{if(!horasSelVid.includes(v))horasSelVid=[...horasSelVid,v].sort();}
+  document.getElementById(inputId).value="";
+  renderHoras(gridId,isImg?horasSel:horasSelVid);
+}
+
+// IMAGEM
+function previewImagem(i){imgFile=i.files[0];if(!imgFile)return;const r=new FileReader();r.onload=e=>{const img=document.getElementById("preview-img");img.src=e.target.result;img.style.display="block";document.querySelector("#upload-area-img .upload-icon").style.display="none";document.querySelector("#upload-area-img .upload-text").style.display="none";};r.readAsDataURL(imgFile);}
+
+// VÍDEO
+function previewVideo(i){
+  vidFile=i.files[0];vidLink="";
+  if(!vidFile)return;
+  const url=URL.createObjectURL(vidFile);
+  const vid=document.getElementById("preview-vid");
+  vid.src=url;vid.style.display="block";
+  document.getElementById("vid-icon").style.display="none";
+  document.getElementById("vid-text").style.display="none";
+  document.getElementById("v-link-video").value="";
+}
+function usarLinkVideo(){
+  const l=document.getElementById("v-link-video").value.trim();
+  if(!l)return;
+  vidLink=l;vidFile=null;
+  document.getElementById("v-video").value="";
+  document.getElementById("preview-vid").style.display="none";
+  document.getElementById("vid-icon").style.display="block";
+  document.getElementById("vid-text").innerHTML=`✅ Link salvo!<br><small style="color:var(--accent)">${l.substring(0,40)}...</small>`;
+  document.getElementById("vid-text").style.display="block";
+  showToast("✅ Link do vídeo salvo!");
+}
+
+// UPLOAD
+async function uploadCL(file,tipo="image"){
+  const fd=new FormData();fd.append("file",file);fd.append("upload_preset",CL_PRESET);
+  if(tipo==="video")fd.append("resource_type","video");
+  const r=await fetch(`https://api.cloudinary.com/v1_1/${CL_CLOUD}/${tipo}/upload`,{method:"POST",body:fd});
+  const d=await r.json();return d.secure_url||null;
+}
+
+// LOAD
+async function loadAll(){
+  const [rp,rv]=await Promise.all([fetch("/api/produtos"),fetch("/api/videos")]);
+  const produtos=await rp.json();
+  const videos=rv.ok?await rv.json():[];
+  renderProdutos(produtos);
+  renderVideos(videos);
+  document.getElementById("hcount").textContent=(produtos.length||0)+(videos.length||0);
+}
+
+// SALVAR PRODUTO
+async function salvarProduto(){
+  const nome=document.getElementById("f-nome").value.trim(),preco=document.getElementById("f-preco").value.trim(),link=document.getElementById("f-link").value.trim();
+  if(!nome||!preco||!link){showToast("Preencha nome, preço e link!","err");return;}
+  if(!horasSel.length){showToast("Selecione pelo menos um horário!","warn");return;}
+  const btn=document.getElementById("btn-salvar-produto"),sp=document.getElementById("spinner-produto"),txt=document.getElementById("btn-txt-produto");
+  btn.disabled=true;sp.style.display="block";txt.textContent="Salvando...";
+  let img="";
+  if(imgFile){img=await uploadCL(imgFile,"image");if(!img){showToast("Erro no upload!","err");btn.disabled=false;sp.style.display="none";txt.textContent="＋ Salvar Produto";return;}}
+  const r=await fetch("/api/produtos",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({senha:senhaLocal,nome,preco,link,imagem:img,horarios:horasSel})});
+  if(r.ok){
+    const d=await r.json();
+    if(d.auto_horario) showToast("✅ Produto salvo! Horários redistribuídos automaticamente 🔀","info");
+    else showToast("✅ Produto salvo!");
+    limparFormProduto();await loadAll();
+  }
+  else showToast("Erro ao salvar!","err");
+  btn.disabled=false;sp.style.display="none";txt.textContent="＋ Salvar Produto";
+}
+
+// SALVAR VÍDEO
+async function salvarVideo(){
+  const nome=document.getElementById("v-nome").value.trim(),preco=document.getElementById("v-preco").value.trim(),link=document.getElementById("v-link").value.trim();
+  if(!nome||!preco||!link){showToast("Preencha nome, preço e link!","err");return;}
+  if(!horasSelVid.length){showToast("Selecione pelo menos um horário!","warn");return;}
+  if(!vidFile&&!vidLink){showToast("Adicione um vídeo ou link!","warn");return;}
+  const btn=document.getElementById("btn-salvar-video"),sp=document.getElementById("spinner-video"),txt=document.getElementById("btn-txt-video");
+  btn.disabled=true;sp.style.display="block";txt.textContent="Salvando...";
+  let videoUrl=vidLink;
+  if(vidFile){videoUrl=await uploadCL(vidFile,"video");if(!videoUrl){showToast("Erro no upload do vídeo!","err");btn.disabled=false;sp.style.display="none";txt.textContent="＋ Salvar Vídeo";return;}}
+  const r=await fetch("/api/videos",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({senha:senhaLocal,nome,preco,link,video:videoUrl,horarios:horasSelVid})});
+  if(r.ok){showToast("✅ Vídeo salvo!");limparFormVideo();await loadAll();}
+  else showToast("Erro ao salvar!","err");
+  btn.disabled=false;sp.style.display="none";txt.textContent="＋ Salvar Vídeo";
+}
+
+// EXCLUIR
+async function excluir(id,tipo){
+  if(!confirm("Remover?"))return;
+  await fetch(`/api/${tipo}/${id}?senha=${senhaLocal}`,{method:"DELETE"});
+  showToast("Removido!");await loadAll();
+}
+
+// MODAL
+function abrirModal(id,horarios,tipo="produto"){
+  modalProdutoId=id;modalTipo=tipo;modalHorasSel=[...horarios];renderModalHoras();
+  document.getElementById("modal-overlay").classList.add("open");
+}
+function fecharModal(){document.getElementById("modal-overlay").classList.remove("open");modalProdutoId=null;modalHorasSel=[];}
+function renderModalHoras(){
+  const g=document.getElementById("modal-horarios-grid");
+  const todos=[...HORAS,...modalHorasSel.filter(h=>!HORAS.includes(h))];
+  g.innerHTML=todos.map(h=>`<div class="modal-hora-chip ${modalHorasSel.includes(h)?"selected":""}" onclick="toggleModalH('${h}')">${h}${!HORAS.includes(h)?" ✕":""}</div>`).join("");
+}
+function toggleModalH(h){modalHorasSel=modalHorasSel.includes(h)?modalHorasSel.filter(x=>x!==h):[...modalHorasSel,h].sort();renderModalHoras();}
+function addModalHora(){const v=document.getElementById("modal-hora-input").value;if(!v||modalHorasSel.includes(v))return;modalHorasSel=[...modalHorasSel,v].sort();document.getElementById("modal-hora-input").value="";renderModalHoras();}
+async function salvarEdicaoHorarios(){
+  if(!modalHorasSel.length){showToast("Selecione pelo menos um horário!","warn");return;}
+  const endpoint=modalTipo==="video"?"videos":"produtos";
+  const r=await fetch(`/api/${endpoint}/${modalProdutoId}/horarios`,{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({senha:senhaLocal,horarios:modalHorasSel})});
+  if(r.ok){showToast("✅ Horários atualizados!");fecharModal();await loadAll();}
+  else showToast("Erro ao atualizar!","err");
+}
+
+// EMBARALHAR
+async function embaralharHorarios(){
+  const btn=document.getElementById("btn-embaralhar");btn.disabled=true;btn.textContent="⏳...";
+  try{
+    const r=await fetch("/api/produtos");const produtos=await r.json();
+    if(!produtos.length){showToast("Nenhum produto!","warn");return;}
+    let todos=[];
+    produtos.forEach(p=>{const hs=Array.isArray(p.horarios)?p.horarios:JSON.parse(p.horarios||"[]");todos=[...todos,...hs];});
+    for(let i=todos.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[todos[i],todos[j]]=[todos[j],todos[i]];}
+    let idx=0;
+    for(const p of produtos){
+      const hs=Array.isArray(p.horarios)?p.horarios:JSON.parse(p.horarios||"[]");
+      const novos=todos.slice(idx,idx+hs.length).sort();idx+=hs.length;
+      await fetch(`/api/produtos/${p.id}/horarios`,{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({senha:senhaLocal,horarios:novos})});
+    }
+    showToast("🔀 Horários embaralhados!","info");await loadAll();
+  }catch(e){showToast("Erro!","err");}
+  finally{btn.disabled=false;btn.innerHTML="🔀 Embaralhar";}
+}
+
+// RENDER PRODUTOS (por categoria)
+function renderProdutos(ps){
+  document.getElementById("count-pill-produtos").textContent=ps.length;
+  const c=document.getElementById("lista-produtos");
+  if(!ps.length){c.innerHTML='<div class="empty-state"><div class="ei">📦</div><p>Nenhum produto ainda.</p></div>';return;}
+  const cats={};
+  ps.forEach(p=>{const cat=detectarCategoria(p.nome);if(!cats[cat])cats[cat]=[];cats[cat].push(p);});
+  c.innerHTML=Object.entries(cats).map(([cat,items])=>`
+    <div class="categoria-section">
+      <div class="categoria-header">
+        <span class="categoria-nome">${cat}</span>
+        <span class="categoria-count">${items.length} produto${items.length>1?"s":""}</span>
+      </div>
+      <div class="product-grid">${items.map(p=>{
+        const hs=Array.isArray(p.horarios)?p.horarios:JSON.parse(p.horarios||"[]");
+        return `<div class="product-card">
+          <div class="product-img-wrap">
+            ${p.imagem?`<img src="${p.imagem}" alt="${p.nome}" loading="lazy">`:`<div class="no-img">🛍️</div>`}
+            <div class="horarios-badge">🕐${hs.length}</div>
+          </div>
+          <div class="product-body">
+            <div class="product-name" title="${p.nome}">${p.nome}</div>
+            <div class="product-price">R$ ${p.preco}</div>
+            <div class="product-horarios">${hs.slice(0,3).map(h=>`<span class="h-tag">${h}</span>`).join("")}${hs.length>3?`<span class="h-tag">+${hs.length-3}</span>`:""}</div>
+            <div class="product-actions">
+              <button class="btn-del" onclick="excluir(${p.id},'produtos')">🗑</button>
+              <button class="btn-edit" onclick="abrirModal(${p.id},${JSON.stringify(hs)},'produto')">✏️</button>
+              <a class="btn-link-card" href="${p.link}" target="_blank">🔗</a>
+            </div>
+          </div>
+        </div>`;}).join("")}</div>
+    </div>`).join("");
+}
+
+// RENDER VÍDEOS (por categoria)
+function renderVideos(vs){
+  document.getElementById("count-pill-videos").textContent=vs.length;
+  const c=document.getElementById("lista-videos");
+  if(!vs.length){c.innerHTML='<div class="empty-state"><div class="ei">🎬</div><p>Nenhum vídeo ainda.</p></div>';return;}
+  const cats={};
+  vs.forEach(v=>{const cat=detectarCategoria(v.nome);if(!cats[cat])cats[cat]=[];cats[cat].push(v);});
+  c.innerHTML=Object.entries(cats).map(([cat,items])=>`
+    <div class="categoria-section">
+      <div class="categoria-header">
+        <span class="categoria-nome">${cat}</span>
+        <span class="categoria-count">${items.length} vídeo${items.length>1?"s":""}</span>
+      </div>
+      <div class="product-grid">${items.map(v=>{
+        const hs=Array.isArray(v.horarios)?v.horarios:JSON.parse(v.horarios||"[]");
+        const isYT=v.video&&v.video.includes("youtube");
+        const isTT=v.video&&v.video.includes("tiktok");
+        return `<div class="product-card">
+          <div class="product-img-wrap">
+            ${v.video&&!isYT&&!isTT?`<video src="${v.video}" style="width:100%;height:100%;object-fit:cover"></video>`:`<div class="no-img">${isYT?"▶️":isTT?"🎵":"🎬"}</div>`}
+            <div class="video-badge">VIDEO</div>
+            <div class="horarios-badge">🕐${hs.length}</div>
+          </div>
+          <div class="product-body">
+            <div class="product-name" title="${v.nome}">${v.nome}</div>
+            <div class="product-price">R$ ${v.preco}</div>
+            <div class="product-horarios">${hs.slice(0,3).map(h=>`<span class="h-tag">${h}</span>`).join("")}${hs.length>3?`<span class="h-tag">+${hs.length-3}</span>`:""}</div>
+            <div class="product-actions">
+              <button class="btn-del" onclick="excluir(${v.id},'videos')">🗑</button>
+              <button class="btn-edit" onclick="abrirModal(${v.id},${JSON.stringify(hs)},'video')">✏️</button>
+              <a class="btn-link-card" href="${v.link}" target="_blank">🔗</a>
+            </div>
+          </div>
+        </div>`;}).join("")}</div>
+    </div>`).join("");
+}
+
+// LIMPAR FORMS
+function limparFormProduto(){["f-nome","f-link","f-preco"].forEach(i=>document.getElementById(i).value="");document.getElementById("f-imagem").value="";document.getElementById("preview-img").style.display="none";document.querySelector("#upload-area-img .upload-icon").style.display="block";document.querySelector("#upload-area-img .upload-text").style.display="block";imgFile=null;horasSel=[];renderHoras("horarios-grid",horasSel);}
+function limparFormVideo(){["v-nome","v-link","v-preco","v-link-video"].forEach(i=>document.getElementById(i).value="");document.getElementById("v-video").value="";document.getElementById("preview-vid").style.display="none";document.getElementById("vid-icon").style.display="block";document.getElementById("vid-text").innerHTML='Toque para escolher um vídeo<br><b>ou arraste aqui</b>';document.getElementById("vid-text").style.display="block";vidFile=null;vidLink="";horasSelVid=[];renderHoras("v-horarios-grid",horasSelVid);}
+
+function showToast(m,t=""){const el=document.getElementById("toast");el.textContent=m;el.className="toast"+(t?" "+t:"");setTimeout(()=>el.classList.add("show"),10);setTimeout(()=>el.classList.remove("show"),3200);}
+document.getElementById("modal-overlay").addEventListener("click",function(e){if(e.target===this)fecharModal();});
+</script>
+</body>
+</html>
