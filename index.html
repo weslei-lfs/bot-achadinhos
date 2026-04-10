@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Achadinhos da Casa - As melhores ofertas da Shopee todo dia! Produtos incríveis com preços impossíveis.">
+<title>Achadinhos da Casa — Ofertas Shopee Todo Dia</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #060912;
+  --surface: #0d1321;
+  --surface2: #131d30;
+  --surface3: #1a2640;
+  --border: #1e2d45;
+  --accent: #3b82f6;
+  --accent2: #60a5fa;
+  --glow: rgba(59,130,246,0.2);
+  --orange: #f97316;
+  --orange2: #fb923c;
+  --green: #10b981;
+  --text: #e2e8f0;
+  --text2: #94a3b8;
+  --muted: #475569;
+}
+* { margin:0; padding:0; box-sizing:border-box }
+html { scroll-behavior:smooth }
+body { background:var(--bg); color:var(--text); font-family:'Plus Jakarta Sans',sans-serif; overflow-x:hidden }
+
+/* ── NAVBAR ── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  padding:16px 32px; display:flex; align-items:center; justify-content:space-between;
+  background:rgba(6,9,18,0.85); backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(59,130,246,0.1);
+  transition:all .3s;
+}
+.nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none }
+.nav-logo-icon { font-size:1.6rem }
+.nav-logo-text { font-size:1.1rem; font-weight:800; color:var(--text); letter-spacing:-0.5px }
+.nav-logo-text span { color:var(--accent) }
+.nav-links { display:flex; align-items:center; gap:8px }
+.nav-link { color:var(--text2); text-decoration:none; font-size:.88rem; font-weight:500; padding:7px 14px; border-radius:8px; transition:all .2s }
+.nav-link:hover { color:var(--text); background:var(--surface2) }
+.nav-cta {
+  background:var(--accent); color:#fff; text-decoration:none;
+  padding:9px 20px; border-radius:10px; font-weight:700; font-size:.88rem;
+  transition:all .2s; display:flex; align-items:center; gap:6px;
+}
+.nav-cta:hover { background:var(--accent2); transform:translateY(-1px); box-shadow:0 6px 20px rgba(59,130,246,.4) }
+.hamburger { display:none; background:transparent; border:none; color:var(--text); font-size:1.4rem; cursor:pointer }
+
+/* ── HERO ── */
+.hero {
+  min-height:100vh; display:flex; align-items:center; justify-content:center;
+  text-align:center; padding:120px 24px 80px; position:relative; overflow:hidden;
+}
+.hero-bg {
+  position:absolute; inset:0; z-index:0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(59,130,246,0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(249,115,22,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 80%, rgba(16,185,129,0.06) 0%, transparent 40%);
+}
+.hero-grid {
+  position:absolute; inset:0; z-index:0; opacity:0.03;
+  background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.hero-content { position:relative; z-index:1; max-width:800px; margin:0 auto }
+.hero-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.3);
+  border-radius:20px; padding:6px 16px; font-size:.82rem; font-weight:600;
+  color:var(--accent2); margin-bottom:24px; animation:fadeUp .6s cubic-bezier(.16,1,.3,1);
+}
+.hero-badge-dot { width:6px; height:6px; border-radius:50%; background:var(--green); animation:pulse 2s infinite }
+.hero-title {
+  font-size:clamp(2.2rem,6vw,4rem); font-weight:900; line-height:1.1;
+  letter-spacing:-1.5px; margin-bottom:20px;
+  animation:fadeUp .6s .1s cubic-bezier(.16,1,.3,1) both;
+}
+.hero-title span { color:var(--accent) }
+.hero-title .orange { color:var(--orange) }
+.hero-sub {
+  font-size:clamp(1rem,2vw,1.2rem); color:var(--text2); line-height:1.6;
+  margin-bottom:36px; max-width:600px; margin-left:auto; margin-right:auto;
+  animation:fadeUp .6s .2s cubic-bezier(.16,1,.3,1) both;
+}
+.hero-btns {
+  display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap;
+  animation:fadeUp .6s .3s cubic-bezier(.16,1,.3,1) both;
+}
+.btn-primary {
+  background:var(--accent); color:#fff; text-decoration:none;
+  padding:14px 32px; border-radius:12px; font-weight:800; font-size:1rem;
+  transition:all .2s; display:flex; align-items:center; gap:8px;
+  box-shadow:0 0 40px rgba(59,130,246,.3);
+}
+.btn-primary:hover { background:var(--accent2); transform:translateY(-2px); box-shadow:0 12px 40px rgba(59,130,246,.5) }
+.btn-secondary {
+  background:transparent; color:var(--text); text-decoration:none;
+  padding:14px 28px; border-radius:12px; font-weight:600; font-size:.95rem;
+  border:1px solid var(--border); transition:all .2s;
+}
+.btn-secondary:hover { border-color:var(--accent); color:var(--accent); background:var(--glow) }
+.hero-stats {
+  display:flex; align-items:center; justify-content:center; gap:32px;
+  margin-top:48px; flex-wrap:wrap;
+  animation:fadeUp .6s .4s cubic-bezier(.16,1,.3,1) both;
+}
+.hero-stat { text-align:center }
+.hero-stat-num { font-size:1.8rem; font-weight:900; color:var(--text); letter-spacing:-1px }
+.hero-stat-num span { color:var(--accent) }
+.hero-stat-label { font-size:.78rem; color:var(--text2); margin-top:2px }
+.hero-stat-divider { width:1px; height:40px; background:var(--border) }
+
+/* ── MARQUEE ── */
+.marquee-wrap { padding:20px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); overflow:hidden; background:var(--surface); margin-top:0 }
+.marquee { display:flex; gap:40px; animation:marquee 20s linear infinite; white-space:nowrap }
+.marquee-item { display:flex; align-items:center; gap:8px; font-size:.85rem; font-weight:600; color:var(--text2) }
+.marquee-item span { color:var(--accent) }
+
+/* ── FEATURES ── */
+.features { padding:80px 24px; max-width:1100px; margin:0 auto }
+.section-label { text-align:center; margin-bottom:12px }
+.section-label span {
+  background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.2);
+  border-radius:20px; padding:5px 14px; font-size:.78rem; font-weight:700; color:var(--accent2);
+}
+.section-title { text-align:center; font-size:clamp(1.6rem,4vw,2.4rem); font-weight:900; letter-spacing:-1px; margin-bottom:12px }
+.section-title span { color:var(--accent) }
+.section-sub { text-align:center; color:var(--text2); font-size:.95rem; margin-bottom:48px; max-width:500px; margin-left:auto; margin-right:auto }
+.features-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px }
+.feature-card {
+  background:var(--surface); border:1px solid var(--border); border-radius:16px;
+  padding:24px; transition:all .25s; position:relative; overflow:hidden;
+}
+.feature-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity:0; transition:opacity .3s;
+}
+.feature-card:hover { border-color:rgba(59,130,246,.4); transform:translateY(-4px); box-shadow:0 20px 40px rgba(0,0,0,.4) }
+.feature-card:hover::before { opacity:1 }
+.feature-icon { font-size:2rem; margin-bottom:14px; display:block }
+.feature-title { font-size:1rem; font-weight:700; margin-bottom:8px }
+.feature-desc { font-size:.85rem; color:var(--text2); line-height:1.6 }
+
+/* ── PRODUTOS ── */
+.produtos-section { padding:80px 24px; max-width:1200px; margin:0 auto }
+.produtos-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:32px; flex-wrap:wrap; gap:12px }
+.produtos-title { font-size:1.8rem; font-weight:900; letter-spacing:-0.5px }
+.produtos-title span { color:var(--orange) }
+.live-badge { display:flex; align-items:center; gap:6px; background:rgba(239,68,68,.1); border:1px solid rgba(239,68,68,.2); border-radius:20px; padding:5px 12px; font-size:.75rem; font-weight:700; color:#ef4444 }
+.live-dot { width:6px; height:6px; border-radius:50%; background:#ef4444; animation:pulse 1.5s infinite }
+.produtos-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:16px }
+.produto-card {
+  background:var(--surface); border:1px solid var(--border); border-radius:16px;
+  overflow:hidden; transition:all .25s; cursor:pointer; text-decoration:none; display:block;
+}
+.produto-card:hover { border-color:rgba(249,115,22,.4); transform:translateY(-4px); box-shadow:0 20px 40px rgba(0,0,0,.4) }
+.produto-img-wrap { width:100%; height:200px; background:var(--surface2); position:relative; overflow:hidden }
+.produto-img-wrap img { width:100%; height:100%; object-fit:cover; transition:transform .3s }
+.produto-card:hover .produto-img-wrap img { transform:scale(1.08) }
+.produto-no-img { width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:3rem; color:var(--border) }
+.produto-badge-hot { position:absolute; top:10px; left:10px; background:var(--orange); color:#fff; border-radius:6px; padding:3px 10px; font-size:.7rem; font-weight:800 }
+.produto-badge-new { position:absolute; top:10px; left:10px; background:var(--green); color:#fff; border-radius:6px; padding:3px 10px; font-size:.7rem; font-weight:800 }
+.produto-body { padding:14px }
+.produto-cat { font-size:.7rem; color:var(--accent2); font-weight:600; text-transform:uppercase; letter-spacing:.5px; margin-bottom:5px }
+.produto-name { font-size:.9rem; font-weight:700; color:var(--text); margin-bottom:10px; line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden }
+.produto-price { font-size:1.3rem; font-weight:900; color:var(--orange); margin-bottom:12px }
+.produto-price small { font-size:.7rem; font-weight:400; color:var(--text2) }
+.btn-comprar {
+  width:100%; background:var(--orange); color:#fff; border:none; border-radius:9px;
+  padding:10px; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:.85rem;
+  cursor:pointer; transition:all .2s; text-decoration:none; display:block; text-align:center;
+}
+.btn-comprar:hover { background:var(--orange2); transform:translateY(-1px) }
+.produtos-empty { text-align:center; padding:60px 20px; color:var(--text2); grid-column:1/-1 }
+.produtos-empty .ei { font-size:3rem; margin-bottom:12px; opacity:.4 }
+.loading-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:16px }
+.skeleton { background:var(--surface); border:1px solid var(--border); border-radius:16px; overflow:hidden }
+.skeleton-img { height:200px; background:linear-gradient(90deg,var(--surface2) 25%,var(--surface3) 50%,var(--surface2) 75%); background-size:200% 100%; animation:shimmer 1.5s infinite }
+.skeleton-body { padding:14px }
+.skeleton-line { height:12px; border-radius:6px; background:linear-gradient(90deg,var(--surface2) 25%,var(--surface3) 50%,var(--surface2) 75%); background-size:200% 100%; animation:shimmer 1.5s infinite; margin-bottom:8px }
+.skeleton-line.short { width:60% }
+.skeleton-line.price { height:20px; width:40%; margin-top:4px }
+
+/* ── CTA SECTION ── */
+.cta-section {
+  padding:80px 24px; text-align:center;
+  background:linear-gradient(135deg, rgba(59,130,246,0.05) 0%, rgba(249,115,22,0.05) 100%);
+  border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+  position:relative; overflow:hidden;
+}
+.cta-glow { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:600px; height:300px; background:radial-gradient(ellipse,rgba(59,130,246,0.08),transparent 70%); pointer-events:none }
+.cta-content { position:relative; z-index:1; max-width:600px; margin:0 auto }
+.cta-title { font-size:clamp(1.8rem,4vw,2.8rem); font-weight:900; letter-spacing:-1px; margin-bottom:16px }
+.cta-title span { color:var(--accent) }
+.cta-sub { color:var(--text2); font-size:1rem; margin-bottom:32px; line-height:1.6 }
+.cta-features { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-bottom:32px }
+.cta-feat { display:flex; align-items:center; gap:6px; font-size:.85rem; color:var(--text2) }
+.cta-feat-icon { color:var(--green); font-size:1rem }
+
+/* ── FOOTER ── */
+footer {
+  padding:40px 32px 24px; border-top:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;
+}
+.footer-logo { display:flex; align-items:center; gap:8px; font-size:1rem; font-weight:800; color:var(--text) }
+.footer-logo span { color:var(--accent) }
+.footer-links { display:flex; gap:16px }
+.footer-link { color:var(--text2); text-decoration:none; font-size:.83rem; transition:color .2s }
+.footer-link:hover { color:var(--accent) }
+.footer-copy { color:var(--muted); font-size:.78rem }
+
+/* ── SCROLL TO TOP ── */
+.scroll-top {
+  position:fixed; bottom:24px; right:24px; width:42px; height:42px;
+  background:var(--accent); color:#fff; border:none; border-radius:10px;
+  font-size:1.1rem; cursor:pointer; transition:all .2s; z-index:99;
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; transform:translateY(10px); pointer-events:none;
+}
+.scroll-top.show { opacity:1; transform:translateY(0); pointer-events:all }
+.scroll-top:hover { background:var(--accent2); transform:translateY(-2px) }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+/* ── MOBILE ── */
+@media(max-width:768px) {
+  nav { padding:14px 20px }
+  .nav-links { display:none }
+  .hamburger { display:block }
+  .hero { padding:100px 20px 60px }
+  .hero-stat-divider { display:none }
+  footer { flex-direction:column; align-items:center; text-align:center }
+  .footer-links { flex-wrap:wrap; justify-content:center }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <span class="nav-logo-icon">🛍️</span>
+    <span class="nav-logo-text">Achad<span>inhos</span> da Casa</span>
+  </a>
+  <div class="nav-links">
+    <a href="#ofertas" class="nav-link">Ofertas</a>
+    <a href="#sobre" class="nav-link">Sobre</a>
+    <a href="https://t.me/+f3BFH9eI9fsxZDRh" target="_blank" class="nav-cta">
+      📲 Entrar no Grupo
+    </a>
+  </div>
+  <button class="hamburger" onclick="document.querySelector('.nav-links').style.display = document.querySelector('.nav-links').style.display === 'flex' ? 'none' : 'flex'">☰</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      Ofertas atualizadas todo dia
+    </div>
+    <h1 class="hero-title">
+      As melhores ofertas da<br>
+      <span>Shopee</span> direto no seu<br>
+      <span class="orange">Telegram! 🔥</span>
+    </h1>
+    <p class="hero-sub">
+      Produtos incríveis com preços impossíveis, selecionados todo dia e enviados automaticamente no seu grupo. Economize sem esforço!
+    </p>
+    <div class="hero-btns">
+      <a href="https://t.me/+f3BFH9eI9fsxZDRh" target="_blank" class="btn-primary">
+        📲 Entrar no Grupo — GRÁTIS
+      </a>
+      <a href="#ofertas" class="btn-secondary">Ver ofertas ↓</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">100<span>%</span></div>
+        <div class="hero-stat-label">Gratuito</div>
+      </div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">24<span>h</span></div>
+        <div class="hero-stat-label">Ofertas por dia</div>
+      </div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">1<span> clique</span></div>
+        <div class="hero-stat-label">Para comprar</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee">
+    <div class="marquee-item">🏠 Casa & Decoração</div>
+    <div class="marquee-item">🍳 Gadgets de Cozinha</div>
+    <div class="marquee-item">📱 Eletrônicos</div>
+    <div class="marquee-item">💄 Beleza & Saúde</div>
+    <div class="marquee-item">💪 Esporte & Fitness</div>
+    <div class="marquee-item">🐾 Pets</div>
+    <div class="marquee-item">👶 Bebê & Criança</div>
+    <div class="marquee-item">🛍️ <span>Shopee Afiliados</span></div>
+    <div class="marquee-item">🏠 Casa & Decoração</div>
+    <div class="marquee-item">🍳 Gadgets de Cozinha</div>
+    <div class="marquee-item">📱 Eletrônicos</div>
+    <div class="marquee-item">💄 Beleza & Saúde</div>
+    <div class="marquee-item">💪 Esporte & Fitness</div>
+    <div class="marquee-item">🐾 Pets</div>
+    <div class="marquee-item">👶 Bebê & Criança</div>
+    <div class="marquee-item">🛍️ <span>Shopee Afiliados</span></div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="features" id="sobre">
+  <div class="section-label"><span>✨ Por que entrar?</span></div>
+  <h2 class="section-title">Tudo que você precisa para <span>economizar muito</span></h2>
+  <p class="section-sub">Sem complicação, sem perder tempo procurando. A gente garimpeia tudo pra você.</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="feature-icon">🤖</span>
+      <div class="feature-title">100% Automático</div>
+      <div class="feature-desc">Nosso bot envia as ofertas automaticamente no grupo do Telegram. Você só precisa aproveitar!</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🔥</span>
+      <div class="feature-title">Ofertas Todo Dia</div>
+      <div class="feature-desc">Produtos novos todo dia, selecionados manualmente para garantir qualidade e preço bom.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">⚡</span>
+      <div class="feature-title">Notificação na Hora</div>
+      <div class="feature-desc">Ative as notificações e saiba das ofertas antes de todo mundo. Preços limitados voam rápido!</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">💰</span>
+      <div class="feature-title">Preços Impossíveis</div>
+      <div class="feature-desc">Só postamos o que realmente vale a pena. Economia garantida em cada compra.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🛡️</span>
+      <div class="feature-title">100% Gratuito</div>
+      <div class="feature-desc">Sem taxa, sem assinatura, sem pegadinha. Sempre foi e sempre será gratuito para você.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">📦</span>
+      <div class="feature-title">Várias Categorias</div>
+      <div class="feature-desc">Casa, cozinha, eletrônicos, beleza, pets e muito mais. Tem oferta para todo tipo de produto!</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUTOS -->
+<section class="produtos-section" id="ofertas">
+  <div class="produtos-header">
+    <h2 class="produtos-title">Ofertas em <span>Destaque 🛍️</span></h2>
+    <div class="live-badge">
+      <div class="live-dot"></div>
+      Atualizado agora
+    </div>
+  </div>
+  <div id="produtos-container">
+    <div class="loading-grid">
+      ${'\n'.join(['''<div class="skeleton">
+        <div class="skeleton-img"></div>
+        <div class="skeleton-body">
+          <div class="skeleton-line short"></div>
+          <div class="skeleton-line"></div>
+          <div class="skeleton-line"></div>
+          <div class="skeleton-line price"></div>
+        </div>
+      </div>''' for _ in range(8)])}
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-glow"></div>
+  <div class="cta-content">
+    <h2 class="cta-title">Pronto para <span>economizar muito?</span></h2>
+    <p class="cta-sub">Entre agora no grupo e receba as melhores ofertas da Shopee direto no seu Telegram — de graça!</p>
+    <div class="cta-features">
+      <div class="cta-feat"><span class="cta-feat-icon">✅</span> Gratuito para sempre</div>
+      <div class="cta-feat"><span class="cta-feat-icon">✅</span> Sem spam</div>
+      <div class="cta-feat"><span class="cta-feat-icon">✅</span> Sair quando quiser</div>
+    </div>
+    <a href="https://t.me/+f3BFH9eI9fsxZDRh" target="_blank" class="btn-primary" style="display:inline-flex;font-size:1.1rem;padding:16px 40px">
+      📲 Entrar no Grupo Agora — GRÁTIS
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">🛍️ Achad<span>inhos</span> da Casa</div>
+  <div class="footer-links">
+    <a href="#ofertas" class="footer-link">Ofertas</a>
+    <a href="#sobre" class="footer-link">Sobre</a>
+    <a href="https://t.me/+f3BFH9eI9fsxZDRh" target="_blank" class="footer-link">Telegram</a>
+  </div>
+  <div class="footer-copy">© 2026 Achadinhos da Casa. Feito com ❤️</div>
+</footer>
+
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+const API = 'https://bot-achadinhos-rsco.onrender.com';
+
+const CATEGORIAS = {
+  "🍳 Cozinha":["frigideira","panela","faca","talheres","copo","prato","xicara","liquidificador","batedeira","airfryer","air fryer","fritadeira","espremedor","descascador","tabua","forma","assadeira","grelha","coador","utensil","gadget","cozinha"],
+  "📱 Eletrônicos":["celular","fone","headphone","carregador","cabo","adaptador","tablet","notebook","computador","teclado","mouse","webcam","camera","smart","tv","led","bluetooth","wifi","usb","hdmi","speaker","caixa de som"],
+  "🏠 Casa":["organizador","caixa","suporte","prateleira","cabide","gancho","ventilador","lampada","cortina","tapete","almofada","vaso","quadro","espelho","decoracao","casa","quarto","sala","banheiro","limpeza"],
+  "💄 Beleza":["creme","perfume","maquiagem","escova","pente","secador","chapinha","massageador","saude","beleza","skincare","hidratante"],
+  "💪 Esporte":["academia","exercicio","musculacao","yoga","corrida","bicicleta","esporte","fitness","treino"],
+  "🐾 Pets":["pet","cachorro","gato","aquario","racao","coleira"],
+  "📦 Outros":[]
+};
+
+function detectarCategoria(nome) {
+  const n = nome.toLowerCase();
+  for(const [cat, palavras] of Object.entries(CATEGORIAS)){
+    if(cat.includes("Outros")) continue;
+    if(palavras.some(p => n.includes(p))) return cat;
+  }
+  return "📦 Outros";
+}
+
+async function carregarProdutos() {
+  try {
+    const r = await fetch(`${API}/api/produtos`);
+    const produtos = await r.json();
+    const container = document.getElementById('produtos-container');
+
+    if(!produtos || !produtos.length) {
+      container.innerHTML = `
+        <div class="produtos-empty">
+          <div class="ei">🛍️</div>
+          <p>Novas ofertas chegando em breve!<br>
+          <a href="https://t.me/+f3BFH9eI9fsxZDRh" target="_blank" style="color:var(--accent)">Entre no grupo do Telegram</a> para receber primeiro!</p>
+        </div>`;
+      return;
+    }
+
+    // Embaralha para variar
+    const shuffled = [...produtos].sort(() => Math.random() - 0.5);
+
+    container.innerHTML = `<div class="produtos-grid">${shuffled.map((p, i) => {
+      const hs = Array.isArray(p.horarios) ? p.horarios : JSON.parse(p.horarios || '[]');
+      const cat = detectarCategoria(p.nome);
+      const badge = i < 3 ? '<div class="produto-badge-hot">🔥 HOT</div>' : i < 6 ? '<div class="produto-badge-new">✨ NOVO</div>' : '';
+      return `
+        <a href="${p.link}" target="_blank" class="produto-card">
+          <div class="produto-img-wrap">
+            ${p.imagem ? `<img src="${p.imagem}" alt="${p.nome}" loading="lazy">` : '<div class="produto-no-img">🛍️</div>'}
+            ${badge}
+          </div>
+          <div class="produto-body">
+            <div class="produto-cat">${cat}</div>
+            <div class="produto-name">${p.nome}</div>
+            <div class="produto-price">R$ ${p.preco} <small>na Shopee</small></div>
+            <div class="btn-comprar">🛒 Comprar Agora</div>
+          </div>
+        </a>`;
+    }).join('')}</div>`;
+  } catch(e) {
+    document.getElementById('produtos-container').innerHTML = `
+      <div class="produtos-empty">
+        <div class="ei">🛍️</div>
+        <p>Entre no grupo do Telegram para ver todas as ofertas!<br>
+        <a href="https://t.me/+f3BFH9eI9fsxZDRh" target="_blank" style="color:var(--accent)">Clique aqui para entrar</a></p>
+      </div>`;
+  }
+}
+
+// Scroll top button
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('scrollTop');
+  if(window.scrollY > 400) btn.classList.add('show');
+  else btn.classList.remove('show');
+});
+
+carregarProdutos();
+</script>
+</body>
+</html>
