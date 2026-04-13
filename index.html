@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Achadinhos da Casa - Os melhores produtos da Shopee com preços incríveis. Eletrônicos, cozinha, moda, beleza e muito mais! Economize todo dia.">
+<meta name="keywords" content="shopee, afiliados, ofertas, promoções, achadinhos, produtos baratos, desconto, telegram">
+<meta name="author" content="Achadinhos da Casa">
+<meta name="theme-color" content="#080d1a">
+<meta property="og:title" content="Achadinhos da Casa — Ofertas Shopee Todo Dia!">
+<meta property="og:description" content="Os melhores produtos da Shopee com preços que você não acredita! Entre no grupo GRÁTIS!">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bot-achadinhos-rsco.onrender.com/loja">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Achadinhos da Casa — Ofertas Shopee Todo Dia!">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛍️</text></svg>">
+<title>Achadinhos da Casa — Melhores Ofertas da Shopee</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080d1a;
+  --bg2:#0d1526;
+  --surface:#111827;
+  --surface2:#1a2235;
+  --surface3:#1e2a3d;
+  --border:#1e2d45;
+  --border2:#263552;
+  --accent:#3b82f6;
+  --accent2:#60a5fa;
+  --accent3:#93c5fd;
+  --accent-glow:rgba(59,130,246,0.15);
+  --orange:#f97316;
+  --orange2:#fb923c;
+  --orange-glow:rgba(249,115,22,0.15);
+  --green:#10b981;
+  --green2:#34d399;
+  --red:#ef4444;
+  --purple:#8b5cf6;
+  --yellow:#f59e0b;
+  --text:#e2e8f0;
+  --text2:#94a3b8;
+  --muted:#475569;
+  --shadow:0 1px 3px rgba(0,0,0,0.4);
+  --shadow-md:0 4px 12px rgba(0,0,0,0.4);
+  --shadow-lg:0 20px 40px rgba(0,0,0,0.5);
+  --shadow-accent:0 8px 24px rgba(59,130,246,0.25);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* ── 1. ANNOUNCEMENT BAR animada ── */
+.announcement{background:linear-gradient(90deg,#1e3a5f,#1e4080,#1e3a5f);background-size:200% 100%;animation:gradientMove 4s linear infinite;padding:9px 24px;text-align:center;font-size:.78rem;font-weight:600;color:#93c5fd;display:flex;align-items:center;justify-content:center;gap:8px}
+.announcement a{color:#fff;font-weight:800;text-decoration:none;background:var(--accent);padding:3px 10px;border-radius:5px;margin-left:6px;transition:all .2s}
+.announcement a:hover{background:var(--accent2)}
+@keyframes gradientMove{0%{background-position:0% 0}100%{background-position:200% 0}}
+
+/* ── 2. NAVBAR premium ── */
+nav{background:rgba(8,13,26,.92);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.nav-inner{max-width:1380px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;gap:16px}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.nav-logo-icon{font-size:1.9rem;filter:drop-shadow(0 0 8px rgba(59,130,246,.5))}
+.nav-logo-text{font-size:1.15rem;font-weight:900;color:var(--text);letter-spacing:-0.5px}
+.nav-logo-text span{color:var(--accent)}
+.nav-logo-sub{font-size:.65rem;color:var(--text2);font-weight:400;display:block;margin-top:-2px}
+
+/* ── 3. BARRA DE BUSCA com ícone ── */
+.nav-search{flex:1;max-width:520px;position:relative}
+.nav-search input{width:100%;background:var(--surface2);border:1.5px solid var(--border2);border-radius:12px;padding:11px 16px 11px 44px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.88rem;color:var(--text);outline:none;transition:all .25s}
+.nav-search input:focus{border-color:var(--accent);background:var(--surface3);box-shadow:0 0 0 3px var(--accent-glow)}
+.nav-search input::placeholder{color:var(--muted)}
+.nav-search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.95rem;pointer-events:none}
+.nav-search-clear{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:var(--muted);color:#fff;border:none;border-radius:50%;width:18px;height:18px;font-size:.6rem;cursor:pointer;display:none;align-items:center;justify-content:center;line-height:1}
+.nav-search-clear.show{display:flex}
+.nav-right{display:flex;align-items:center;gap:10px;margin-left:auto}
+.nav-stat{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:8px 14px;font-size:.78rem;color:var(--text2);display:flex;align-items:center;gap:6px}
+.nav-stat-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+.nav-stat b{color:var(--green)}
+.btn-telegram-nav{background:linear-gradient(135deg,var(--accent),#1d4ed8);color:#fff;text-decoration:none;padding:10px 20px;border-radius:11px;font-weight:800;font-size:.85rem;display:flex;align-items:center;gap:7px;transition:all .2s;white-space:nowrap;box-shadow:var(--shadow-accent)}
+.btn-telegram-nav:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(59,130,246,.4)}
+
+/* ── 4. HERO com partículas e gradiente épico ── */
+.hero{position:relative;overflow:hidden;padding:60px 28px 52px;background:var(--bg2)}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 15% 60%,rgba(59,130,246,.12) 0%,transparent 50%),radial-gradient(ellipse at 85% 30%,rgba(249,115,22,.08) 0%,transparent 45%),radial-gradient(ellipse at 50% 100%,rgba(139,92,246,.06) 0%,transparent 40%);z-index:0}
+.hero-grid-bg{position:absolute;inset:0;opacity:.025;background-image:linear-gradient(var(--border2) 1px,transparent 1px),linear-gradient(90deg,var(--border2) 1px,transparent 1px);background-size:48px 48px;z-index:0}
+.hero-inner{max-width:1380px;margin:0 auto;position:relative;z-index:1;display:flex;align-items:center;gap:48px;flex-wrap:wrap}
+.hero-left{flex:1;min-width:300px}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.25);border-radius:20px;padding:6px 16px;font-size:.75rem;font-weight:700;color:var(--accent2);margin-bottom:20px}
+.hero-badge-live{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 1.5s infinite;flex-shrink:0}
+.hero-title{font-size:clamp(2rem,4vw,3rem);font-weight:900;line-height:1.1;letter-spacing:-1.5px;margin-bottom:16px;color:var(--text)}
+.hero-title .hl-blue{color:var(--accent)}
+.hero-title .hl-orange{color:var(--orange)}
+.hero-sub{font-size:.98rem;color:var(--text2);line-height:1.7;margin-bottom:28px;max-width:480px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:32px}
+.btn-hero-primary{background:linear-gradient(135deg,var(--accent),#1d4ed8);color:#fff;text-decoration:none;padding:14px 28px;border-radius:12px;font-weight:800;font-size:.95rem;display:flex;align-items:center;gap:8px;transition:all .2s;box-shadow:var(--shadow-accent)}
+.btn-hero-primary:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(59,130,246,.45)}
+.btn-hero-secondary{background:var(--surface2);color:var(--text);text-decoration:none;padding:14px 22px;border-radius:12px;font-weight:600;font-size:.92rem;border:1px solid var(--border2);transition:all .2s}
+.btn-hero-secondary:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-glow)}
+
+/* ── 5. STATS no hero ── */
+.hero-stats{display:flex;gap:24px;flex-wrap:wrap}
+.hero-stat{display:flex;flex-direction:column}
+.hero-stat-num{font-size:1.5rem;font-weight:900;color:var(--text);letter-spacing:-0.5px;line-height:1}
+.hero-stat-num span{color:var(--accent)}
+.hero-stat-label{font-size:.72rem;color:var(--text2);margin-top:3px}
+.hero-stat-divider{width:1px;background:var(--border2);align-self:stretch}
+
+/* ── 6. HERO CARDS ── */
+.hero-right{display:flex;flex-direction:column;gap:10px;min-width:260px}
+.mini-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:12px;animation:slideIn .4s cubic-bezier(.16,1,.3,1) both}
+.mini-card:nth-child(2){animation-delay:.1s}
+.mini-card:nth-child(3){animation-delay:.2s}
+.mini-card-img{width:44px;height:44px;border-radius:8px;object-fit:cover;background:var(--surface2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.4rem}
+.mini-card-info{flex:1;min-width:0}
+.mini-card-name{font-size:.78rem;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mini-card-price{font-size:.82rem;font-weight:900;color:var(--orange);margin-top:1px}
+.mini-card-badge{background:var(--green);color:#fff;border-radius:5px;padding:2px 7px;font-size:.62rem;font-weight:800;flex-shrink:0}
+
+/* ── 7. MARQUEE de categorias ── */
+.marquee-wrap{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;padding:12px 0}
+.marquee-track{display:flex;gap:0;animation:marquee 25s linear infinite}
+.marquee-track:hover{animation-play-state:paused}
+.marquee-item{display:flex;align-items:center;gap:8px;padding:0 28px;font-size:.82rem;font-weight:600;color:var(--text2);white-space:nowrap;border-right:1px solid var(--border);cursor:pointer;transition:color .2s}
+.marquee-item:hover{color:var(--accent)}
+.marquee-item span{font-size:1rem}
+
+/* ── 8. MAIN LAYOUT ── */
+.main-wrap{max-width:1380px;margin:0 auto;padding:28px 28px 80px;display:flex;gap:22px;align-items:flex-start}
+
+/* ── 9. SIDEBAR inteligente ── */
+.sidebar{width:240px;flex-shrink:0;position:sticky;top:76px;display:flex;flex-direction:column;gap:14px}
+.sidebar-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px;overflow:hidden}
+.sidebar-title{font-size:.75rem;font-weight:800;color:var(--text2);text-transform:uppercase;letter-spacing:.7px;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.filter-btn{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:9px;cursor:pointer;transition:all .15s;border:none;background:transparent;width:100%;text-align:left;margin-bottom:2px}
+.filter-btn:hover{background:var(--surface2)}
+.filter-btn.active{background:var(--accent-glow);border:1px solid rgba(59,130,246,.2)}
+.filter-label{display:flex;align-items:center;gap:8px;font-size:.83rem;font-weight:500;color:var(--text2)}
+.filter-btn.active .filter-label{color:var(--accent);font-weight:700}
+.filter-num{background:var(--surface2);border-radius:5px;padding:1px 7px;font-size:.68rem;font-weight:700;color:var(--muted)}
+.filter-btn.active .filter-num{background:rgba(59,130,246,.2);color:var(--accent)}
+.sidebar-tg{background:linear-gradient(135deg,rgba(59,130,246,.15),rgba(29,78,216,.1));border:1px solid rgba(59,130,246,.25);border-radius:14px;padding:18px;text-align:center}
+.sidebar-tg-icon{font-size:2.2rem;margin-bottom:8px;filter:drop-shadow(0 0 8px rgba(59,130,246,.4))}
+.sidebar-tg-title{font-size:.9rem;font-weight:800;color:var(--text);margin-bottom:6px}
+.sidebar-tg-desc{font-size:.75rem;color:var(--text2);line-height:1.5;margin-bottom:14px}
+.btn-tg-side{display:block;background:var(--accent);color:#fff;text-decoration:none;padding:10px;border-radius:9px;font-weight:700;font-size:.82rem;text-align:center;transition:all .2s}
+.btn-tg-side:hover{background:var(--accent2);transform:translateY(-1px)}
+.sidebar-trust{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px}
+.trust-item{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.trust-item:last-child{margin-bottom:0}
+.trust-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+.trust-icon.green{background:rgba(16,185,129,.15)}
+.trust-icon.blue{background:rgba(59,130,246,.15)}
+.trust-icon.orange{background:rgba(249,115,22,.15)}
+.trust-text{font-size:.75rem;color:var(--text2);line-height:1.4}
+.trust-text b{color:var(--text);display:block;font-size:.78rem}
+
+/* ── CONTENT ── */
+.content{flex:1;min-width:0}
+.content-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px}
+.content-info{flex:1}
+.content-title{font-size:1.1rem;font-weight:800;color:var(--text)}
+.content-meta{font-size:.78rem;color:var(--text2);margin-top:2px}
+.content-controls{display:flex;align-items:center;gap:8px}
+.sort-select{background:var(--surface2);border:1px solid var(--border2);border-radius:9px;padding:8px 13px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.8rem;color:var(--text);outline:none;cursor:pointer;transition:border-color .2s}
+.sort-select:focus{border-color:var(--accent)}
+.view-btn{background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:8px 10px;cursor:pointer;color:var(--text2);font-size:.85rem;transition:all .2s}
+.view-btn.active{background:var(--accent-glow);border-color:rgba(59,130,246,.3);color:var(--accent)}
+
+/* ── 10. CATEGORY SECTION ── */
+.cat-section{margin-bottom:36px;animation:fadeUp .4s cubic-bezier(.16,1,.3,1)}
+.cat-section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.cat-section-title{display:flex;align-items:center;gap:10px;font-size:1rem;font-weight:800;color:var(--text)}
+.cat-pill{background:var(--accent-glow);border:1px solid rgba(59,130,246,.2);border-radius:6px;padding:2px 9px;font-size:.7rem;font-weight:700;color:var(--accent2)}
+.cat-ver-mais{font-size:.78rem;color:var(--accent);cursor:pointer;font-weight:600;background:none;border:none;transition:color .2s}
+.cat-ver-mais:hover{color:var(--accent2)}
+
+/* ── 11. PRODUTOS GRID dark premium ── */
+.produtos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.produtos-grid.list-view{grid-template-columns:1fr}
+
+.produto-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .25s;text-decoration:none;display:flex;flex-direction:column;position:relative}
+.produto-card:hover{border-color:rgba(59,130,246,.4);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.5),0 0 0 1px rgba(59,130,246,.1)}
+
+/* ── 12. SHIMMER na imagem ── */
+.produto-img-wrap{width:100%;aspect-ratio:1;background:var(--surface2);position:relative;overflow:hidden}
+.produto-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.produto-card:hover .produto-img-wrap img{transform:scale(1.08)}
+.produto-no-img{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--border)}
+.produto-img-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,13,26,.6) 0%,transparent 50%);opacity:0;transition:opacity .3s}
+.produto-card:hover .produto-img-overlay{opacity:1}
+
+/* ── 13. BADGES múltiplos ── */
+.produto-badges{position:absolute;top:8px;left:8px;display:flex;flex-direction:column;gap:4px;z-index:2}
+.badge{border-radius:5px;padding:3px 8px;font-size:.62rem;font-weight:800;letter-spacing:.3px}
+.badge-hot{background:linear-gradient(135deg,#dc2626,#b91c1c);color:#fff}
+.badge-new{background:linear-gradient(135deg,#16a34a,#15803d);color:#fff}
+.badge-deal{background:linear-gradient(135deg,#f97316,#ea580c);color:#fff}
+.badge-top{background:linear-gradient(135deg,#7c3aed,#6d28d9);color:#fff}
+
+/* ── 14. WISHLIST botão ── */
+.btn-wishlist{position:absolute;top:8px;right:8px;width:30px;height:30px;border-radius:8px;background:rgba(8,13,26,.7);backdrop-filter:blur(4px);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.85rem;transition:all .2s;z-index:2;opacity:0}
+.produto-card:hover .btn-wishlist{opacity:1}
+.btn-wishlist:hover{background:rgba(239,68,68,.2);border-color:var(--red)}
+
+/* ── PRODUTO BODY ── */
+.produto-body{padding:13px;flex:1;display:flex;flex-direction:column;gap:0}
+.produto-cat{font-size:.65rem;color:var(--accent2);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.produto-name{font-size:.85rem;font-weight:600;color:var(--text);margin-bottom:10px;line-height:1.4;flex:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.produto-price-row{display:flex;align-items:flex-end;gap:6px;margin-bottom:10px}
+.produto-price{font-size:1.15rem;font-weight:900;color:var(--orange)}
+.produto-price-old{font-size:.72rem;color:var(--muted);text-decoration:line-through}
+.produto-price-label{font-size:.65rem;color:var(--muted);margin-top:1px}
+
+/* ── 15. BOTÃO com gradiente e hover ── */
+.btn-ver{width:100%;background:linear-gradient(135deg,var(--accent),#1d4ed8);color:#fff;border:none;border-radius:9px;padding:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:.82rem;cursor:pointer;transition:all .2s;text-decoration:none;display:block;text-align:center;position:relative;overflow:hidden}
+.btn-ver::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.1),transparent);opacity:0;transition:opacity .2s}
+.btn-ver:hover::after{opacity:1}
+.btn-ver:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(59,130,246,.4)}
+
+/* ── 16. LIST VIEW ── */
+.produtos-grid.list-view .produto-card{flex-direction:row;height:100px}
+.produtos-grid.list-view .produto-img-wrap{width:100px;aspect-ratio:unset;height:100%;flex-shrink:0}
+.produtos-grid.list-view .produto-body{flex-direction:row;align-items:center;gap:12px;padding:12px}
+.produtos-grid.list-view .produto-name{margin-bottom:0;-webkit-line-clamp:1}
+.produtos-grid.list-view .produto-price-row{margin-bottom:0;flex-shrink:0}
+.produtos-grid.list-view .btn-ver{width:auto;padding:8px 16px;flex-shrink:0}
+.produtos-grid.list-view .produto-cat{display:none}
+
+/* ── EMPTY / LOADING ── */
+.empty-state{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--text2)}
+.empty-icon{font-size:3.5rem;margin-bottom:14px;opacity:.3}
+.skeleton{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.skel-img{aspect-ratio:1;background:linear-gradient(90deg,var(--surface2) 25%,var(--surface3) 50%,var(--surface2) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite}
+.skel-body{padding:13px}
+.skel-line{height:10px;border-radius:5px;background:linear-gradient(90deg,var(--surface2) 25%,var(--surface3) 50%,var(--surface2) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;margin-bottom:8px}
+.skel-line.short{width:45%}
+.skel-line.price{height:16px;width:35%;margin-top:4px}
+
+/* ── 17. FLOATING TELEGRAM épico ── */
+.float-social{position:fixed;bottom:28px;right:24px;z-index:999;display:flex;flex-direction:column;gap:8px;align-items:center}
+.fsoc-btn{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;text-decoration:none;transition:all .2s;box-shadow:0 4px 14px rgba(0,0,0,.3);animation:bounceIn .6s cubic-bezier(.16,1,.3,1) both}
+.fsoc-btn:hover{transform:translateY(-3px) scale(1.1);box-shadow:0 8px 20px rgba(0,0,0,.4)}
+.fsoc-tg{background:linear-gradient(135deg,#0ea5e9,#1d4ed8);animation-delay:.1s}
+.fsoc-wa{background:linear-gradient(135deg,#25d366,#128c7e);animation-delay:.2s}
+.fsoc-ig{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);animation-delay:.3s}
+.fsoc-tt{background:linear-gradient(135deg,#000,#333);animation-delay:.4s}
+
+/* ── 18. SCROLL TO TOP ── */
+.scroll-top{position:fixed;bottom:28px;left:28px;width:40px;height:40px;background:var(--surface2);border:1px solid var(--border2);border-radius:10px;color:var(--text2);font-size:1rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(10px);pointer-events:none;z-index:99}
+.scroll-top.show{opacity:1;transform:translateY(0);pointer-events:all}
+.scroll-top:hover{background:var(--accent-glow);border-color:var(--accent);color:var(--accent)}
+
+/* ── 19. FOOTER dark premium ── */
+footer{background:var(--surface);border-top:1px solid var(--border);padding:48px 28px 24px}
+.footer-inner{max-width:1380px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;margin-bottom:32px}
+.footer-brand .footer-logo{display:flex;align-items:center;gap:10px;font-size:1.1rem;font-weight:900;color:var(--text);margin-bottom:12px}
+.footer-brand .footer-logo span{color:var(--accent)}
+.footer-desc{font-size:.8rem;color:var(--text2);line-height:1.7;margin-bottom:16px}
+.footer-social{display:flex;gap:8px}
+.social-btn{width:34px;height:34px;border-radius:8px;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.9rem;cursor:pointer;transition:all .2s;text-decoration:none;color:var(--text2)}
+.social-btn:hover{background:var(--accent-glow);border-color:var(--accent)}
+.footer-col h4{font-size:.75rem;font-weight:800;color:var(--text);text-transform:uppercase;letter-spacing:.7px;margin-bottom:14px}
+.footer-col a{display:block;color:var(--text2);text-decoration:none;font-size:.82rem;margin-bottom:8px;transition:color .2s}
+.footer-col a:hover{color:var(--accent)}
+.footer-bottom{border-top:1px solid var(--border);padding-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.footer-copy{font-size:.75rem;color:var(--muted)}
+.footer-tags{display:flex;gap:6px;flex-wrap:wrap}
+.footer-tag{background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:2px 8px;font-size:.65rem;color:var(--muted)}
+
+/* ── 20. TOAST de notificação ── */
+.toast-container{position:fixed;top:80px;right:20px;z-index:999;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.toast{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:10px;font-size:.82rem;font-weight:600;color:var(--text);box-shadow:var(--shadow-lg);transform:translateX(110%);transition:transform .4s cubic-bezier(.16,1,.3,1);pointer-events:all;max-width:280px}
+.toast.show{transform:translateX(0)}
+.toast-icon{font-size:1.1rem;flex-shrink:0}
+.toast-text{flex:1;line-height:1.4}
+.toast-close{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.8rem;padding:2px}
+
+/* ── ANIMATIONS ── */
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@keyframes bounceIn{0%{opacity:0;transform:scale(.7) translateY(20px)}100%{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes ping{0%{transform:scale(1);opacity:.7}100%{transform:scale(2.5);opacity:0}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── MOBILE ── */
+@media(max-width:1024px){.sidebar{display:none}.main-wrap{padding:20px 16px 80px}.footer-top{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.nav-inner{flex-wrap:wrap;gap:10px}.nav-search{order:3;max-width:100%;width:100%}.nav-right .nav-stat{display:none}.hero-inner{flex-direction:column}.hero-right{display:none}.produtos-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}.footer-top{grid-template-columns:1fr 1fr}.hero{padding:40px 20px 36px}}
+@media(max-width:480px){.produtos-grid{grid-template-columns:repeat(2,1fr)}.float-tg a span:last-child{display:none}.footer-top{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-container" id="toast-container"></div>
+
+<!-- ANNOUNCEMENT -->
+<div class="announcement">
+  🔥 Novo produto todo dia! Receba no Telegram antes de todo mundo
+  <a href="https://t.me/+f3BFH9eI9fsxZDRh" target="_blank">Entrar GRÁTIS →</a>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <span class="nav-logo-icon">🛍️</span>
+      <div>
+        <span class="nav-logo-text">Achad<span>inhos</span> da Casa</span>
+        <span class="nav-logo-sub">Ofertas Shopee · Atualizado todo dia</span>
+      </div>
+    </a>
+    <div class="nav-search">
+      <span class="nav-search-icon">🔍</span>
+      <input type="text" id="search-input" placeholder="Buscar produtos, categorias..." oninput="onSearch(this.value)">
+      <button class="nav-search-clear" id="search-clear" onclick="limparBusca()">✕</button>
+    </div>
+    <div class="nav-right">
+      <div class="nav-stat">
+        <div class="nav-stat-dot"></div>
+        <b id="nav-count">0</b> produtos
+      </div>
+      <a href="https://t.me/+f3BFH9eI9fsxZDRh" target="_blank" class="btn-telegram-nav">
+        📲 Grupo Telegram
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge"><div class="hero-badge-live"></div> Ofertas atualizadas agora</div>
+      <h1 class="hero-title">
+        Os melhores produtos da<br>
+        <span class="hl-blue">Shopee</span> com preços que<br>
+        você não <span class="hl-orange">acredita! 🔥</span>
+      </h1>
+      <p class="hero-sub">Exploramos a Shopee todo dia para trazer os produtos mais incríveis com os melhores preços. Tudo selecionado com cuidado pra você economizar de verdade!</p>
+      <div class="hero-btns">
+        <a href="https://t.me/+f3BFH9eI9fsxZDRh" target="_blank" class="btn-hero-primary">📲 Receber no Telegram — GRÁTIS</a>
+        <a href="#produtos" class="btn-hero-secondary">Ver ofertas ↓</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="hero-stat-num">100<span>%</span></div><div class="hero-stat-label">Gratuito</div></div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat"><div class="hero-stat-num" id="stat-produtos">0</div><div class="hero-stat-label">Produtos</div></div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat"><div class="hero-stat-num">24<span>h</span></div><div class="hero-stat-label">Por dia</div></div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat"><div class="hero-stat-num">1<span> clique</span></div><div class="hero-stat-label">Para comprar</div></div>
+      </div>
+    </div>
+    <div class="hero-right" id="hero-cards"></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item" onclick="filtrarCategoria('🍳 Cozinha')"><span>🍳</span> Cozinha</div>
+    <div class="marquee-item" onclick="filtrarCategoria('📱 Eletrônicos')"><span>📱</span> Eletrônicos</div>
+    <div class="marquee-item" onclick="filtrarCategoria('🏠 Casa')"><span>🏠</span> Casa</div>
+    <div class="marquee-item" onclick="filtrarCategoria('💄 Beleza')"><span>💄</span> Beleza</div>
+    <div class="marquee-item" onclick="filtrarCategoria('👟 Tênis')"><span>👟</span> Tênis</div>
+    <div class="marquee-item" onclick="filtrarCategoria('👗 Moda Feminina')"><span>👗</span> Moda Feminina</div>
+    <div class="marquee-item" onclick="filtrarCategoria('👔 Moda Masculina')"><span>👔</span> Moda Masculina</div>
+    <div class="marquee-item" onclick="filtrarCategoria('💍 Acessórios')"><span>💍</span> Acessórios</div>
+    <div class="marquee-item" onclick="filtrarCategoria('💻 Informática')"><span>💻</span> Informática</div>
+    <div class="marquee-item" onclick="filtrarCategoria('🧸 Brinquedos')"><span>🧸</span> Brinquedos</div>
+    <div class="marquee-item" onclick="filtrarCategoria('👶 Bebê')"><span>👶</span> Bebê</div>
+    <div class="marquee-item" onclick="filtrarCategoria('💪 Esporte')"><span>💪</span> Esporte</div>
+    <div class="marquee-item" onclick="filtrarCategoria('🐾 Pets')"><span>🐾</span> Pets</div>
+    <!-- duplicado -->
+    <div class="marquee-item" onclick="filtrarCategoria('🍳 Cozinha')"><span>🍳</span> Cozinha</div>
+    <div class="marquee-item" onclick="filtrarCategoria('📱 Eletrônicos')"><span>📱</span> Eletrônicos</div>
+    <div class="marquee-item" onclick="filtrarCategoria('🏠 Casa')"><span>🏠</span> Casa</div>
+    <div class="marquee-item" onclick="filtrarCategoria('💄 Beleza')"><span>💄</span> Beleza</div>
+    <div class="marquee-item" onclick="filtrarCategoria('👟 Tênis')"><span>👟</span> Tênis</div>
+    <div class="marquee-item" onclick="filtrarCategoria('👗 Moda Feminina')"><span>👗</span> Moda Feminina</div>
+    <div class="marquee-item" onclick="filtrarCategoria('👔 Moda Masculina')"><span>👔</span> Moda Masculina</div>
+    <div class="marquee-item" onclick="filtrarCategoria('💍 Acessórios')"><span>💍</span> Acessórios</div>
+    <div class="marquee-item" onclick="filtrarCategoria('💻 Informática')"><span>💻</span> Informática</div>
+    <div class="marquee-item" onclick="filtrarCategoria('🧸 Brinquedos')"><span>🧸</span> Brinquedos</div>
+    <div class="marquee-item" onclick="filtrarCategoria('👶 Bebê')"><span>👶</span> Bebê</div>
+    <div class="marquee-item" onclick="filtrarCategoria('💪 Esporte')"><span>💪</span> Esporte</div>
+    <div class="marquee-item" onclick="filtrarCategoria('🐾 Pets')"><span>🐾</span> Pets</div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main-wrap" id="produtos">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-title">🗂️ Categorias</div>
+      <div id="filter-list"></div>
+    </div>
+    <div class="sidebar-tg">
+      <div class="sidebar-tg-icon">📲</div>
+      <div class="sidebar-tg-title">Receba no Telegram!</div>
+      <div class="sidebar-tg-desc">Entre no grupo e receba as melhores ofertas direto no seu celular, todo dia.</div>
+      <a href="https://t.me/+f3BFH9eI9fsxZDRh" target="_blank" class="btn-tg-side">Entrar GRÁTIS →</a>
+    </div>
+    <div class="sidebar-trust">
+      <div class="sidebar-title">🛡️ Confiança</div>
+      <div class="trust-item">
+        <div class="trust-icon green">✅</div>
+        <div class="trust-text"><b>100% Gratuito</b>Sem taxa ou assinatura</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon blue">🔗</div>
+        <div class="trust-text"><b>Direto na Shopee</b>Compra segura e oficial</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon orange">🔥</div>
+        <div class="trust-text"><b>Selecionado</b>Curado todo dia pra você</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- CONTENT -->
+  <div class="content">
+    <div class="content-topbar">
+      <div class="content-info">
+        <div class="content-title" id="content-title">Todas as Ofertas</div>
+        <div class="content-meta" id="content-meta">Carregando...</div>
+      </div>
+      <div class="content-controls">
+        <select class="sort-select" onchange="ordenar(this.value)">
+          <option value="default">Relevância</option>
+          <option value="menor">Menor preço</option>
+          <option value="maior">Maior preço</option>
+          <option value="az">A → Z</option>
+        </select>
+        <button class="view-btn active" id="btn-grid" onclick="setView('grid')" title="Grade">⊞</button>
+        <button class="view-btn" id="btn-list" onclick="setView('list')" title="Lista">☰</button>
+      </div>
+    </div>
+    <div id="produtos-container"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">🛍️ Achad<span>inhos</span> da Casa</div>
+        <p class="footer-desc">Sua loja de ofertas da Shopee. Produtos selecionados todo dia com os melhores preços para você economizar de verdade. Entre no grupo do Telegram e receba tudo primeiro!</p>
+        <div class="footer-social">
+          <a href="https://t.me/+f3BFH9eI9fsxZDRh" target="_blank" class="social-btn" title="Telegram">📲</a>
+          <a href="https://chat.whatsapp.com/JUybW7apubs8Q0zatvudTm" target="_blank" class="social-btn" title="WhatsApp">💬</a>
+          <a href="https://www.instagram.com/wg_achadinhosdacasa" target="_blank" class="social-btn" title="Instagram">📸</a>
+          <a href="https://www.tiktok.com/@wg.achadinhos.da.casa" target="_blank" class="social-btn" title="TikTok">🎵</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Categorias</h4>
+        <a href="#" onclick="filtrarCategoria('🍳 Cozinha');return false">🍳 Cozinha</a>
+        <a href="#" onclick="filtrarCategoria('🏠 Casa');return false">🏠 Casa</a>
+        <a href="#" onclick="filtrarCategoria('📱 Eletrônicos');return false">📱 Eletrônicos</a>
+        <a href="#" onclick="filtrarCategoria('💄 Beleza');return false">💄 Beleza</a>
+        <a href="#" onclick="filtrarCategoria('💪 Esporte');return false">💪 Esporte</a>
+        <a href="#" onclick="filtrarCategoria('🐾 Pets');return false">🐾 Pets</a>
+      </div>
+      <div class="footer-col">
+        <h4>Comunidade</h4>
+        <a href="https://t.me/+f3BFH9eI9fsxZDRh" target="_blank">📲 Grupo Telegram</a>
+        <a href="#">📸 Instagram</a>
+        <a href="#">🎵 TikTok</a>
+        <a href="#">📌 Pinterest</a>
+      </div>
+      <div class="footer-col">
+        <h4>Informações</h4>
+        <a href="#">Sobre nós</a>
+        <a href="#">Como funciona</a>
+        <a href="#">Política de afiliados</a>
+        <a href="#">Contato</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Achadinhos da Casa · Todos os direitos reservados · Afiliado Shopee</span>
+      <div class="footer-tags">
+        <span class="footer-tag">Shopee</span>
+        <span class="footer-tag">Afiliados</span>
+        <span class="footer-tag">Ofertas</span>
+        <span class="footer-tag">Telegram</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOAT SOCIAL -->
+<div class="float-social">
+  <a href="https://t.me/+f3BFH9eI9fsxZDRh" target="_blank" class="fsoc-btn fsoc-tg" title="Telegram">📲</a>
+  <a href="https://chat.whatsapp.com/JUybW7apubs8Q0zatvudTm" target="_blank" class="fsoc-btn fsoc-wa" title="WhatsApp">💬</a>
+  <a href="https://www.instagram.com/wg_achadinhosdacasa" target="_blank" class="fsoc-btn fsoc-ig" title="Instagram">📸</a>
+  <a href="https://www.tiktok.com/@wg.achadinhos.da.casa" target="_blank" class="fsoc-btn fsoc-tt" title="TikTok">🎵</a>
+</div>
+
+<!-- SCROLL TOP -->
+<button class="scroll-top" id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+const API = 'https://bot-achadinhos-rsco.onrender.com';
+let todos = [], catAtiva = 'Todos', ordemAtiva = 'default', viewAtiva = 'grid';
+
+let CATS = {};
+let catsCarregadas = false;
+
+async function carregarCategorias() {
+  if(catsCarregadas) return;
+  try {
+    const r = await fetch('/api/categorias');
+    const cats = await r.json();
+    CATS = {};
+    cats.forEach(c => {
+      let palavras = c.palavras_chave;
+      if(typeof palavras === 'string') palavras = JSON.parse(palavras);
+      CATS[c.emoji + ' ' + c.nome] = palavras || [];
+    });
+    catsCarregadas = true;
+  } catch(e) {
+    console.log('Usando categorias padrão');
+  }
+}
+
+function detectCat(nome) {
+  const n = nome.toLowerCase();
+  for(const [cat, palavras] of Object.entries(CATS)){
+    if(cat.includes('Outros')) continue;
+    if(palavras.some(p => n.includes(p.toLowerCase()))) return cat;
+  }
+  return '📦 Outros';
+}
+
+function precoNum(p) { return parseFloat(String(p).replace(/\./g,'').replace(',','.')) || 0; }
+
+async function carregar() {
+  await carregarCategorias();
+  mostrarSkeleton();
+  try {
+    const r = await fetch(`${API}/api/produtos`);
+    todos = await r.json();
+    document.getElementById('nav-count').textContent = todos.length;
+    document.getElementById('stat-produtos').textContent = todos.length;
+    construirFiltros();
+    renderHeroCards();
+    renderProdutos();
+    setTimeout(() => showToast('🔥 '+todos.length+' ofertas carregadas!', 'success'), 800);
+  } catch(e) {
+    document.getElementById('produtos-container').innerHTML = `<div class="empty-state"><div class="empty-icon">🛍️</div><p>Entre no <a href="https://t.me/+f3BFH9eI9fsxZDRh" target="_blank" style="color:var(--accent);font-weight:700">grupo do Telegram</a> para ver todas as ofertas!</p></div>`;
+  }
+}
+
+function renderHeroCards() {
+  const sample = todos.slice(0,3);
+  document.getElementById('hero-cards').innerHTML = sample.map(p => `
+    <div class="mini-card">
+      ${p.imagem ? `<img class="mini-card-img" src="${p.imagem}" alt="${p.nome}" loading="lazy">` : `<div class="mini-card-img">🛍️</div>`}
+      <div class="mini-card-info">
+        <div class="mini-card-name">${p.nome}</div>
+        <div class="mini-card-price">R$ ${p.preco}</div>
+      </div>
+      <span class="mini-card-badge">HOT</span>
+    </div>`).join('');
+}
+
+function construirFiltros() {
+  const contagens = {'Todos': todos.length};
+  todos.forEach(p => { const c = p.categoria || detectCat(p.nome) || '📦 Outros'; contagens[c] = (contagens[c]||0)+1; });
+  document.getElementById('filter-list').innerHTML = Object.entries(contagens).map(([cat,n]) => `
+    <button class="filter-btn ${cat===catAtiva?'active':''}" onclick="filtrarCategoria('${cat}')">
+      <span class="filter-label">${cat==='Todos'?'🛍️ Todos':cat}</span>
+      <span class="filter-num">${n}</span>
+    </button>`).join('');
+  // Atualiza marquee com categorias reais
+  const marqueeItems = Object.keys(contagens).filter(c=>c!=='Todos').map(c=>`<div class="marquee-item" onclick="filtrarCategoria('${c}')">${c}</div>`).join('');
+  const marqueeEl = document.querySelector('.marquee-track');
+  if(marqueeEl && marqueeItems) marqueeEl.innerHTML = marqueeItems + marqueeItems;
+}
+
+function filtrarCategoria(cat) {
+  catAtiva = cat;
+  document.getElementById('search-input').value = '';
+  document.getElementById('search-clear').classList.remove('show');
+  construirFiltros();
+  renderProdutos();
+  document.getElementById('produtos').scrollIntoView({behavior:'smooth'});
+}
+
+function onSearch(v) {
+  document.getElementById('search-clear').classList.toggle('show', v.length > 0);
+  renderProdutos();
+}
+
+function limparBusca() {
+  document.getElementById('search-input').value = '';
+  document.getElementById('search-clear').classList.remove('show');
+  renderProdutos();
+}
+
+function ordenar(v) { ordemAtiva = v; renderProdutos(); }
+
+function setView(v) {
+  viewAtiva = v;
+  document.getElementById('btn-grid').classList.toggle('active', v==='grid');
+  document.getElementById('btn-list').classList.toggle('active', v==='list');
+  renderProdutos();
+}
+
+function getFiltrados() {
+  const busca = document.getElementById('search-input').value.toLowerCase().trim();
+  let lista = [...todos];
+  if(catAtiva !== 'Todos') lista = lista.filter(p => {
+    const cat = p.categoria || detectCat(p.nome) || '📦 Outros';
+    return cat === catAtiva || cat.includes(catAtiva.replace(/^[^\s]+\s/,'').trim()) || catAtiva.includes(cat.replace(/^[^\s]+\s/,'').trim());
+  });
+  if(busca) lista = lista.filter(p => p.nome.toLowerCase().includes(busca));
+  if(ordemAtiva==='menor') lista.sort((a,b)=>precoNum(a.preco)-precoNum(b.preco));
+  else if(ordemAtiva==='maior') lista.sort((a,b)=>precoNum(b.preco)-precoNum(a.preco));
+  else if(ordemAtiva==='az') lista.sort((a,b)=>a.nome.localeCompare(b.nome));
+  return lista;
+}
+
+function renderProdutos() {
+  const lista = getFiltrados();
+  const busca = document.getElementById('search-input').value.trim();
+  const c = document.getElementById('produtos-container');
+  document.getElementById('content-title').textContent = catAtiva==='Todos' && !busca ? 'Todas as Ofertas' : busca ? `Resultados para "${busca}"` : catAtiva;
+  document.getElementById('content-meta').textContent = `${lista.length} produto${lista.length!==1?'s':''} encontrado${lista.length!==1?'s':''}`;
+
+  if(!lista.length) { c.innerHTML=`<div class="empty-state"><div class="empty-icon">🔍</div><p>Nenhum produto encontrado${busca?` para "${busca}"`:''}.`; return; }
+
+  if(catAtiva==='Todos' && !busca) {
+    const porCat = {};
+    lista.forEach(p => { const cat=p.categoria||detectCat(p.nome)||'📦 Outros'; if(!porCat[cat])porCat[cat]=[]; porCat[cat].push(p); });
+    c.innerHTML = Object.entries(porCat).map(([cat,prods]) => `
+      <div class="cat-section">
+        <div class="cat-section-header">
+          <div class="cat-section-title">${cat} <span class="cat-pill">${prods.length}</span></div>
+          <button class="cat-ver-mais" onclick="filtrarCategoria('${cat}')">Ver todos →</button>
+        </div>
+        <div class="produtos-grid ${viewAtiva==='list'?'list-view':''}">${prods.map((p,i)=>cardHTML(p,i)).join('')}</div>
+      </div>`).join('');
+  } else {
+    c.innerHTML = `<div class="produtos-grid ${viewAtiva==='list'?'list-view':''}">${lista.map((p,i)=>cardHTML(p,i)).join('')}</div>`;
+  }
+}
+
+function cardHTML(p, i) {
+  const badge = i===0?'<span class="badge badge-hot">🔥 HOT</span>':i<3?'<span class="badge badge-new">✨ NOVO</span>':i<6?'<span class="badge badge-deal">💸 OFERTA</span>':i<9?'<span class="badge badge-top">⭐ TOP</span>':'';
+  return `<a href="${p.link}" target="_blank" class="produto-card" onclick="registrarClick(${p.id},'${p.nome.substring(0,30)}','${p.categoria||detectCat(p.nome)}')">
+    <div class="produto-img-wrap">
+      ${p.imagem?`<img src="${p.imagem}" alt="${p.nome}" loading="lazy">`:`<div class="produto-no-img">🛍️</div>`}
+      <div class="produto-img-overlay"></div>
+      <div class="produto-badges">${badge}</div>
+      <button class="btn-wishlist" onclick="event.preventDefault();showToast('❤️ Salvo nos favoritos!')">♡</button>
+    </div>
+    <div class="produto-body">
+      <div class="produto-cat">${p.categoria||detectCat(p.nome)||'📦 Outros'}</div>
+      <div class="produto-name">${p.nome}</div>
+      <div class="produto-price-row">
+        <div>
+          <div class="produto-price">R$ ${p.preco}</div>
+          <div class="produto-price-label">na Shopee · Frete grátis</div>
+        </div>
+      </div>
+      <div class="btn-ver">Ver Oferta na Shopee →</div>
+    </div>
+  </a>`;
+}
+
+function mostrarSkeleton() {
+  document.getElementById('produtos-container').innerHTML = `<div class="produtos-grid">${Array(8).fill(`<div class="skeleton"><div class="skel-img"></div><div class="skel-body"><div class="skel-line short"></div><div class="skel-line"></div><div class="skel-line"></div><div class="skel-line price"></div></div></div>`).join('')}</div>`;
+}
+
+async function registrarClick(id, nome, categoria) {
+  try {
+    fetch('/api/click', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({produto_id: id, nome: nome, categoria: categoria})
+    });
+  } catch(e) {}
+}
+
+let toastIdx = 0;
+function showToast(msg, type='') {
+  const id = 'toast-'+toastIdx++;
+  const c = document.getElementById('toast-container');
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.id = id;
+  el.innerHTML = `<span class="toast-icon">${type==='success'?'✅':'ℹ️'}</span><span class="toast-text">${msg}</span><button class="toast-close" onclick="removeToast('${id}')">✕</button>`;
+  c.appendChild(el);
+  setTimeout(() => el.classList.add('show'), 50);
+  setTimeout(() => removeToast(id), 4000);
+}
+function removeToast(id) {
+  const el = document.getElementById(id);
+  if(el){el.classList.remove('show');setTimeout(()=>el.remove(),400);}
+}
+
+window.addEventListener('scroll', () => {
+  document.getElementById('scroll-top').classList.toggle('show', window.scrollY > 500);
+});
+
+carregar();
+</script>
+</body>
+</html>
